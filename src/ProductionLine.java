@@ -1,6 +1,8 @@
 public class ProductionLine extends Thread {
     protected int ID=0;
     protected int actualLevel;
+    protected int maxLevel;
+    protected int levelCost;
     protected Department department;
     protected int levelEfficiency;
     protected int actualResources;
@@ -11,36 +13,22 @@ public class ProductionLine extends Thread {
     protected QueueToDepartment queueToThisDepartment;
     protected QueueToDepartment queueToNextDepartment;
 
-    public ProductionLine(int actualLevel, Department department, Game game) {
-        this.actualLevel = actualLevel;
-        this.levelEfficiency=(int)Math.pow(10, actualLevel)*10;
+    public ProductionLine(Department department, Game game, int maxLevel) {
         this.department = department;
         this.actualResources = 0;
         this.isBusy = false;
         this.game = game;
         this.tankInDepartment = null;
-    }
+        this.maxLevel = maxLevel;
 
-//    public ProductionLine(ProductionLine productionLine) {
-//        this.actualLevel = productionLine.getActualLevel();
-//        this.departmentNumber = productionLine.getDepartmentNumber();
-//        this.levelCost = productionLine.getLevelCost();
-//        this.levelEfficiency = productionLine.getLevelEfficiency();
-//        this.actualResources = 0;
-//        this.maxLevel = productionLine.getMaxLevel();
-//        this.isBusy = false;
-//        this.name = productionLine.getNameDepartment();
-//        this.game = productionLine.getGame();
-//        this.tankInDepartment = null;
-//        this.ID=game.AssignID();
-//    }
-
-    public ProductionLine(){
-
+        this.actualLevel = 0;
+        this.levelEfficiency = (int) Math.pow(2, actualLevel) * 10;
+        this.levelCost = (int) Math.pow(4, actualLevel) * 10000;
     }
 
 
-    public synchronized boolean Upgrade(int level){
+    public synchronized boolean Upgrade() {
+        System.out.println("TEST 5!");
             synchronized (this){
                 while(this.isBusy()) {
                     try {
@@ -50,9 +38,15 @@ public class ProductionLine extends Thread {
                     }
                 }
                 this.setBusy(true);
-                actualLevel=level;
-                //System.out.println("|||||||||||||||||||||||||||Upgrade||||||||||||||||||||||||||||||||||");
-                levelEfficiency=(int)Math.pow(10, level)*10;
+                System.out.println("TEST 6!");
+
+                if (actualLevel < maxLevel) {
+                    actualLevel++;
+                    //System.out.println("|||||||||||||||||||||||||||UpgradeLine||||||||||||||||||||||||||||||||||");
+                    levelEfficiency = (int) Math.pow(2, actualLevel) * 10;
+                    levelCost = (int) Math.pow(4, actualLevel) * 10000;
+                }
+
                 this.setBusy(false);
             }
 
@@ -78,8 +72,15 @@ public class ProductionLine extends Thread {
     }
 
     protected void SendTankToNextQueue(Tank tank){
+        while (queueToNextDepartment.IsFull()) {
+            try {
+                Thread.sleep(100 / game.getSpeed());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         synchronized (queueToNextDepartment){
-            while (queueToNextDepartment.isBusy()){
+            while (queueToNextDepartment.isBusy()) {
                 try {
                     this.wait();
                 } catch (InterruptedException e) {
@@ -87,7 +88,7 @@ public class ProductionLine extends Thread {
                 }
             }
             queueToNextDepartment.setBusy(true);
-            while(!queueToNextDepartment.GiveTankToQueue(tank));
+            while (!queueToNextDepartment.GiveTankToQueue(tank))
             this.tanksServiced++;
             queueToNextDepartment.setBusy(false);
         }
@@ -101,6 +102,13 @@ public class ProductionLine extends Thread {
 
     protected Tank TakeNextTank(){
         Tank tank = null;
+        while (queueToThisDepartment.IsEmpty()) {
+            try {
+                Thread.sleep(100 / game.getSpeed());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         synchronized (queueToThisDepartment){
             while (queueToThisDepartment.isBusy()){
                 try {
@@ -159,6 +167,11 @@ public class ProductionLine extends Thread {
         } while (true);
     }
 
+    public int getLevelCost() {
+        return levelCost;
+    }
+
+
     public void setID(int ID) {
         this.ID=ID;
     }
@@ -210,10 +223,14 @@ public class ProductionLine extends Thread {
 
     public String Status(){
         return "ProductionLine: ID "+ String.valueOf(department.getIDOfDepartment())+"  "+ department.getName() + String.valueOf(ID)+"={"+
-                " aLevel=" + actualLevel +
+                ", aLevel=" + actualLevel +
+                ", efficiency=" + levelEfficiency +
+                ", levelCost=" + levelCost +
+                ", lineCost=" + department.getNewLineCost() +
                 ", iBusy=" + isBusy +
                 ", tank=" + tankInDepartment +
                 ", tServiced=" + tanksServiced +
+                ",numberOfProductionLines= " + department.getNumberOfProductionLines() +
                 ", " + queueToThisDepartment.Status() +
                 "}";
 

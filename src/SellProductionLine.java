@@ -1,14 +1,13 @@
 public class SellProductionLine extends ProductionLine {
 
-    public SellProductionLine(int actualLevel, Department department , Game game) {
-        super(actualLevel, department, game);
+    public SellProductionLine(Department department, Game game, int maxLevel) {
+        super(department, game, maxLevel);
     }
 
     @Override
-    protected void SendTankToNextQueue(Tank tank){
-        game.SellTank(tank.Sell());
+    protected void SendTankToNextQueue(Tank tank) {
+        game.SellTank(tankInDepartment.Sell());
         this.tanksServiced++;
-
     }
 
 
@@ -19,20 +18,4 @@ public class SellProductionLine extends ProductionLine {
     }
 
 
-    @Override
-    public String toString() {
-        return "SellProductionLine{" +
-                "ID=" + ID +
-                ", actualLevel=" + actualLevel +
-                ", department=" + department +
-                ", levelEfficiency=" + levelEfficiency +
-                ", actualResources=" + actualResources +
-                ", isBusy=" + isBusy +
-                ", tankInDepartment=" + tankInDepartment +
-                ", tanksServiced=" + tanksServiced +
-                ", game=" + game +
-                ", queueToThisDepartment=" + queueToThisDepartment +
-                ", queueToNextDepartment=" + queueToNextDepartment +
-                '}';
-    }
 }

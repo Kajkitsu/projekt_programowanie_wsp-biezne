@@ -5,6 +5,8 @@ public class QueueToDepartment {
     int maxTanksInQueue;
     List<Tank> tanksList;
     boolean isBusy=false;
+    boolean isEmpty = true;
+    boolean isFull = false;
 
 
     public QueueToDepartment(int maxTanksInQueue) {
@@ -16,13 +18,14 @@ public class QueueToDepartment {
         if(maxTanksInQueue>tanksList.size()){
             synchronized (this){
                 tanksList.add(tank);
+                if (isEmpty) isEmpty = false;
+                if (maxTanksInQueue == tanksList.size()) isFull = true;
             }
             try {
                 this.notifyAll();
             } catch (Exception e) {
                 ;
             }
-            //System.out.println(this.toString());
             return true;
         }
         else return false;
@@ -33,6 +36,8 @@ public class QueueToDepartment {
             Tank tank;
             synchronized (this){
                 tank = tanksList.remove(0);
+                if (isFull) isFull = false;
+                if (tanksList.size() == 0) isEmpty = true;
             }
             try {
                 this.notifyAll();
@@ -45,12 +50,30 @@ public class QueueToDepartment {
         else return null;
     }
 
+
+//    public synchronized boolean GiveTankToQueue(Tank tank){
+//        if(maxTanksInQueue>tanksList.size()){
+//            tanksList.add(tank);
+//
+//            return true;
+//        }
+//        else return false;
+//    }
+//
+//    public synchronized Tank TakeTankFromQueue(){
+//        if(tanksList.size()>0){
+//            Tank tank = tanksList.remove(0);
+//            return tank;
+//        }
+//        else return null;
+//    }
+
     public boolean IsEmpty(){
-        return this.tanksList.size()==0;
+        return isEmpty;
     }
 
     public boolean IsFull(){
-        return this.tanksList.size()==this.maxTanksInQueue;
+        return isFull;
     }
 
     public boolean isBusy() {
@@ -62,9 +85,11 @@ public class QueueToDepartment {
     }
 
     public String Status(){
-        return "QueueToDepartment={"+
-                " maxTanksInQueue=" + maxTanksInQueue +
-                ", tanksList.size()=" + tanksList.size()+"}";
+        return " Queue={" +
+                "maxTanksInQueue= " + maxTanksInQueue +
+                "isBusy= " + isBusy +
+                ", tanksList.size= " + tanksList.size() +
+                "}";
 
     }
 

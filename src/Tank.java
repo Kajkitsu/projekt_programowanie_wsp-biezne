@@ -18,15 +18,8 @@ public class Tank {
         return requiredResourcesFromDepartment[department.getIDOfDepartment()];
     }
 
-    public void setRequiredResourcesFromDepartment(int[] requiredResourcesFromDepartment) {
-        this.requiredResourcesFromDepartment = requiredResourcesFromDepartment;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }

@@ -1,7 +1,4 @@
-import java.util.List;
-
 public class Status extends Thread {
-    List<ProductionLine> departmentsList;
     Department departments[];
     Game game;
 

@@ -1,30 +1,16 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class Game {
-    int speed;
-    Money money;
-    int soldTank=0;
-
-    List<Tank> tanksList;
-//    List<ProductionLine> productionList;
-    protected QueueToDepartment queueToDepartment[];
-    protected int IDOfDepartment = 1;
-    Department[] departments;
+    private int speed;
+    private Money money;
+    private int soldTank = 0;
+    private QueueToDepartment queueToDepartment[];
+    private Department[] departments;
 
     public Game(int speed, int money, QueueToDepartment[] queueToDepartment) {
         this.speed = speed;
         this.money = new Money(money);
         this.soldTank = 0;
-        this.tanksList = new ArrayList<Tank>();
-//        this.productionList = new ArrayList<ProductionLine>();
         this.queueToDepartment = queueToDepartment;
     }
-    public int AssignID(){
-        return IDOfDepartment++;
-    }
-
-
 
     public int getSpeed() {
         return speed;
@@ -57,34 +43,32 @@ public class Game {
         }
     }
 
-    public void BuyUpgradeForDepartment(int ID){
-        //System.out.println("!!!!!!!!");
-        //System.out.println("!!!!!!!!!!!!! Upgrade ID:"+ID);
-        departments[ID].Upgrade();
-        //System.out.println("!!!!!!!!!!!!! FinishUpgrade ID:"+ID);
-    };
+    public void BuyUpgradeForLineFrom(int IdLine, int IdDepartment) {
+        System.out.println("TEST 1!");
+        if (departments[IdDepartment].getNumberOfProductionLines() > IdLine) {
+            System.out.println("TEST 1,5!");
+            ProductionLine line = departments[IdDepartment].getLine(IdLine);
+            System.out.println("TEST 2!");
+            if (this.TakeMoney(line.getLevelCost()) &&
+                    line.getActualLevel() < departments[IdDepartment].getMaxLevel()
 
-    public void BuyNewLineDepartment(int ID){
-        //System.out.println("!!!!!!!!");
-        //System.out.println("!!!!!!!!!!!!! New ID:"+ID);
-        departments[ID].AddLineToDepartment();
-        //System.out.println("!!!!!!!!!!!!! FinishNew ID:"+ID);
-    };
+            ) {
+                System.out.println("TEST 3!");
+                line.Upgrade();
+            }
+        }
 
+    }
 
-
-
-
-
-//    public synchronized void AddProductionLine(ProductionLine productionLine){
-//        productionLine.setID(this.AssignID());
-//        productionList.add(productionLine);
-//        productionLine.start();
-//    }
+    public void BuyNewLineToDepartment(int IdDepartment) {
+        if (this.TakeMoney(departments[IdDepartment].getNewLineCost()) &&
+                departments[IdDepartment].getNumberOfProductionLines() < departments[IdDepartment].getMaxLines()) {
+            departments[IdDepartment].AddNewLine();
+        }
+    }
 
 
     public boolean TakeMoney(int takeMoney){
-//        System.out.println("if");
         if(money.GetMoney()>=takeMoney) {
 
             synchronized (money){
@@ -105,11 +89,9 @@ public class Game {
             } catch (Exception e) {
                 ;
             }
-//            System.out.println("notify");
             return true;
         }
         else {
-//            System.out.println("false");
             return false;
         }
 
@@ -133,10 +115,6 @@ public class Game {
     public void setDepartments(Department[] departments) {
         this.departments = departments;
     }
-
-//    public List<ProductionLine> getProductionList() {
-//        return productionList;
-//    }
 
 
     public String Status(){

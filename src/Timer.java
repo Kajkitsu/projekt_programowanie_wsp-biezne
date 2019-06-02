@@ -1,8 +1,10 @@
 public class Timer extends Thread  {
-    int globalTime;
+    private int globalTime;
+    private Game game;
 
-    Timer(int globalTime){
+    Timer(int globalTime, Game game) {
         this.globalTime=globalTime;
+        this.game = game;
         this.start();
     }
 
@@ -16,13 +18,13 @@ public class Timer extends Thread  {
         do {
 
             try {
-                Thread.sleep(10);
+                Thread.sleep(100 / game.getSpeed());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
 
-            globalTime+=10;
+            globalTime += 1;
             //System.out.println("Global time: "+globalTime);
 
 

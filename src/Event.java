@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class Event extends Thread {
     Game game;
     int type;
@@ -29,17 +27,20 @@ public class Event extends Thread {
                 e.printStackTrace();
             }
 
-            //System.out.println("To event: "+String.valueOf(timeOfEvent-timer.getGlobalTime()));
 
 
             if(timeOfEvent-timer.getGlobalTime()<0){
                 if(type==1){
-                    //System.out.println("globalTime>=timeOfEvent");
-                    game.BuyUpgradeForDepartment(ID);
+                    game.BuyNewLineToDepartment(ID);
                 }
                 if(type==2){
-                    //System.out.println("globalTime>=timeOfEvent");
-                    game.BuyNewLineDepartment(ID);
+                    game.BuyUpgradeForLineFrom(0, ID);
+                }
+                if (type == 3) {
+                    game.BuyUpgradeForLineFrom(1, ID);
+                }
+                if (type == 4) {
+                    game.BuyUpgradeForLineFrom(2, ID);
                 }
 
             }
