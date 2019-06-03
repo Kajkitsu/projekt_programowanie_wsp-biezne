@@ -1,3 +1,5 @@
+package kajkitsu.projektPW;
+
 public class Timer extends Thread  {
     private int globalTime;
     private Game game;

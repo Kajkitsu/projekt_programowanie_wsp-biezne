@@ -1,3 +1,5 @@
+package kajkitsu.projektPW;
+
 public class Game {
     private int speed;
     private Money money;
@@ -25,8 +27,7 @@ public class Game {
             while (money.isMoneyUpdating()) {
                 try {
                     money.wait();
-                }
-                catch (InterruptedException e) {
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
@@ -72,8 +73,7 @@ public class Game {
                 while (money.isMoneyUpdating()) {
                     try {
                         money.wait();
-                    }
-                    catch (InterruptedException e) {
+                    } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
@@ -84,8 +84,7 @@ public class Game {
                 money.notifyAll();
             }
             return true;
-        }
-        else {
+        } else {
             return false;
         }
 

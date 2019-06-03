@@ -1,3 +1,5 @@
+package kajkitsu.projektPW;
+
 public class ProductionLine extends Thread {
     protected int ID=0;
     protected int actualLevel;
@@ -29,30 +31,30 @@ public class ProductionLine extends Thread {
 
     public boolean Upgrade() {
         System.out.println("TEST 5!");
-            synchronized (this){
-                while(this.isBusy()) {
-                    try {
-                        this.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        synchronized (this){
+            while(this.isBusy()) {
+                try {
+                    this.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-                this.setBusy(true);
-                System.out.println("TEST 6!");
+            }
+            this.setBusy(true);
+            System.out.println("TEST 6!");
 
-                if (actualLevel < maxLevel) {
-                    actualLevel++;
-                    //System.out.println("|||||||||||||||||||||||||||UpgradeLine||||||||||||||||||||||||||||||||||");
-                    levelEfficiency = (int) Math.pow(2, actualLevel) * 10;
-                    levelCost = (int) Math.pow(4, actualLevel) * 10000;
-                }
-
-                this.setBusy(false);
-
-                this.notifyAll();
+            if (actualLevel < maxLevel) {
+                actualLevel++;
+                //System.out.println("|||||||||||||||||||||||||||UpgradeLine||||||||||||||||||||||||||||||||||");
+                levelEfficiency = (int) Math.pow(2, actualLevel) * 10;
+                levelCost = (int) Math.pow(4, actualLevel) * 10000;
             }
 
-            return true;
+            this.setBusy(false);
+
+            this.notifyAll();
+        }
+
+        return true;
     }
 
     protected void CollectingResources(Tank tank) {
@@ -177,8 +179,6 @@ public class ProductionLine extends Thread {
     public int getActualResources() {
         return actualResources;
     }
-
-
 
 
     public Game getGame() {

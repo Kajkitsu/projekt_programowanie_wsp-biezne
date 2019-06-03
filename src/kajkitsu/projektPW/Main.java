@@ -1,3 +1,5 @@
+package kajkitsu.projektPW;
+
 import java.util.Random;
 
 public class Main {
@@ -102,7 +104,6 @@ public class Main {
 
 
     }
-
 
 
 }

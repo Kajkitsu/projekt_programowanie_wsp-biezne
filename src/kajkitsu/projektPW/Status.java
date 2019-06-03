@@ -1,3 +1,5 @@
+package kajkitsu.projektPW;
+
 public class Status extends Thread {
     Department departments[];
     Game game;
@@ -12,7 +14,7 @@ public class Status extends Thread {
     public void run() {
 
         do {
-            for(int i=0; i<7;i++){
+            for(int i = 0; i<7; i++){
                 for(ProductionLine productionLine : departments[i].getListsLine()){
                     System.out.println(productionLine.Status());
                 }

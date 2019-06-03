@@ -1,3 +1,5 @@
+package kajkitsu.projektPW;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +45,6 @@ public class Department {
         }
 
     }
-
 
 
     public List<ProductionLine> getListsLine() {

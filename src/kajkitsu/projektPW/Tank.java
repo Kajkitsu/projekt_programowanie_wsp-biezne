@@ -1,3 +1,5 @@
+package kajkitsu.projektPW;
+
 public class Tank {
     private int requiredResourcesFromDepartment[];
     private int reward;

@@ -1,3 +1,5 @@
+package kajkitsu.projektPW;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,8 +26,7 @@ public class QueueToDepartment {
                 this.notifyAll();
             }
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     public Tank TakeTankFromQueue(){
@@ -38,8 +39,7 @@ public class QueueToDepartment {
                 this.notifyAll();
             }
             return tank;
-        }
-        else return null;
+        } else return null;
     }
 
 

@@ -1,3 +1,5 @@
+package kajkitsu.projektPW;
+
 public class Money {
     private int money;
     boolean isMoneyUpdating = false;
@@ -10,8 +12,7 @@ public class Money {
         if(money+change>=0) {
             money+=change;
             return true;
-        }
-        else return false;
+        } else return false;
 
     }
 

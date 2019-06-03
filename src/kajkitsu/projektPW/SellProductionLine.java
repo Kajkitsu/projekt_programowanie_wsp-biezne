@@ -1,3 +1,5 @@
+package kajkitsu.projektPW;
+
 public class SellProductionLine extends ProductionLine {
 
     public SellProductionLine(Department department, Game game, int maxLevel) {

@@ -1,3 +1,5 @@
+package kajkitsu.projektPW;
+
 public class Event extends Thread {
     Game game;
     int type;
@@ -15,8 +17,6 @@ public class Event extends Thread {
     }
 
 
-
-
     @Override
     public void run() {
         do {
@@ -26,7 +26,6 @@ public class Event extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
 
 
             if(timeOfEvent-timer.getGlobalTime()<0){
