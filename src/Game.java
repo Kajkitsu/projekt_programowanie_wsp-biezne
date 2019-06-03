@@ -20,8 +20,7 @@ public class Game {
         this.speed = speed;
     }
 
-    public synchronized void SellTank(int addMoney){
-
+    public void SellTank(int addMoney) {
         synchronized (money){
             while (money.isMoneyUpdating()) {
                 try {
@@ -35,12 +34,10 @@ public class Game {
             money.ChangeMoney(addMoney);
             soldTank++;
             money.setMoneyUpdating(false);
-        }
-        try {
+
             money.notifyAll();
-        } catch (Exception e) {
-            ;
         }
+
     }
 
     public void BuyUpgradeForLineFrom(int IdLine, int IdDepartment) {
@@ -83,11 +80,8 @@ public class Game {
                 money.setMoneyUpdating(true);
                 money.ChangeMoney(-takeMoney);
                 money.setMoneyUpdating(false);
-            }
-            try {
+
                 money.notifyAll();
-            } catch (Exception e) {
-                ;
             }
             return true;
         }

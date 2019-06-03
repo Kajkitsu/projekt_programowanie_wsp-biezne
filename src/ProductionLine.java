@@ -27,7 +27,7 @@ public class ProductionLine extends Thread {
     }
 
 
-    public synchronized boolean Upgrade() {
+    public boolean Upgrade() {
         System.out.println("TEST 5!");
             synchronized (this){
                 while(this.isBusy()) {
@@ -48,13 +48,10 @@ public class ProductionLine extends Thread {
                 }
 
                 this.setBusy(false);
+
+                this.notifyAll();
             }
 
-            try {
-                this.notifyAll();
-            } catch (Exception e) {
-                ;
-            }
             return true;
     }
 
@@ -72,47 +69,30 @@ public class ProductionLine extends Thread {
     }
 
     protected void SendTankToNextQueue(Tank tank){
-        while (queueToNextDepartment.IsFull()) {
-            try {
-                Thread.sleep(100 / game.getSpeed());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
         synchronized (queueToNextDepartment){
-            while (queueToNextDepartment.isBusy()) {
+            while (queueToNextDepartment.isBusy() || queueToNextDepartment.IsFull()) {
                 try {
-                    this.wait();
+                    queueToNextDepartment.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
             queueToNextDepartment.setBusy(true);
-            while (!queueToNextDepartment.GiveTankToQueue(tank))
-            this.tanksServiced++;
+            while (!queueToNextDepartment.GiveTankToQueue(tank)) ;
             queueToNextDepartment.setBusy(false);
-        }
-        try {
+
             queueToNextDepartment.notifyAll();
-        } catch (Exception e) {
-            ;
         }
+        this.tanksServiced++;
 
     }
 
     protected Tank TakeNextTank(){
         Tank tank = null;
-        while (queueToThisDepartment.IsEmpty()) {
-            try {
-                Thread.sleep(100 / game.getSpeed());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
         synchronized (queueToThisDepartment){
-            while (queueToThisDepartment.isBusy()){
+            while (queueToThisDepartment.isBusy() || queueToThisDepartment.IsEmpty()) {
                 try {
-                    this.wait();
+                    queueToThisDepartment.wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -120,11 +100,8 @@ public class ProductionLine extends Thread {
             queueToThisDepartment.setBusy(true);
             tank=queueToThisDepartment.TakeTankFromQueue();
             queueToThisDepartment.setBusy(false);
-        }
-        try {
+
             queueToThisDepartment.notifyAll();
-        } catch (Exception e) {
-            ;
         }
 
         return tank;
@@ -156,13 +133,9 @@ public class ProductionLine extends Thread {
                     this.SendTankToNextQueue(tankInDepartment);
                 }
                 this.setBusy(false);
-            }
-            try {
-                this.notifyAll();
-            } catch (Exception e) {
-                ;
-            }
 
+                this.notifyAll();
+            }
 
         } while (true);
     }
@@ -180,7 +153,7 @@ public class ProductionLine extends Thread {
         return ID;
     }
 
-    public synchronized boolean isBusy() {
+    public boolean isBusy() {
         return isBusy;
     }
 

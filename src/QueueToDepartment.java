@@ -20,11 +20,8 @@ public class QueueToDepartment {
                 tanksList.add(tank);
                 if (isEmpty) isEmpty = false;
                 if (maxTanksInQueue == tanksList.size()) isFull = true;
-            }
-            try {
+
                 this.notifyAll();
-            } catch (Exception e) {
-                ;
             }
             return true;
         }
@@ -38,14 +35,9 @@ public class QueueToDepartment {
                 tank = tanksList.remove(0);
                 if (isFull) isFull = false;
                 if (tanksList.size() == 0) isEmpty = true;
-            }
-            try {
                 this.notifyAll();
-            } catch (Exception e) {
-                ;
             }
             return tank;
-
         }
         else return null;
     }

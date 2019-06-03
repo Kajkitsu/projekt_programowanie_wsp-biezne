@@ -19,7 +19,7 @@ public class Money {
         return money;
     }
 
-    public synchronized boolean isMoneyUpdating() {
+    public boolean isMoneyUpdating() {
         return isMoneyUpdating;
     }
 
