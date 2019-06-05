@@ -18,8 +18,11 @@ public class Game {
         return speed;
     }
 
+
     public void setSpeed(int speed) {
+
         this.speed = speed;
+
     }
 
     public void SellTank(int addMoney) {
@@ -39,6 +42,18 @@ public class Game {
             money.notifyAll();
         }
 
+    }
+
+    public int getUpgradeLineCost(int dep, int line) {
+        return departments[dep].getLine(line).getLevelCost();
+    }
+
+    public int getNewLineCost(int dep) {
+        return departments[dep].getNewLineCost();
+    }
+
+    public boolean isOnMaxLevel(int dep, int line) {
+        return departments[dep].getMaxLevel() == departments[dep].getLine(line).getActualLevel();
     }
 
     public void BuyUpgradeForLineFrom(int IdLine, int IdDepartment) {

@@ -11,7 +11,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox prefHeight="360.0" prefWidth="1410.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox prefHeight="360.0" prefWidth="1410.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="kajkitsu.projektPW.Controller">
     <children>
         <Separator prefWidth="200.0"/>
         <HBox prefHeight="177.0" prefWidth="1382.0">
@@ -29,38 +30,38 @@
                                         <Insets bottom="1.0" left="10.0" right="1.0" top="5.0"/>
                                     </HBox.margin>
                                 </Text>
-                                <Button fx:id="speedButtonPause" mnemonicParsing="false" prefWidth="50.0" text="||">
-                                    <HBox.margin>
-                                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
-                                    </HBox.margin>
-                                </Button>
-                                <Button fx:id="speedButtonx1" mnemonicParsing="false" prefWidth="50.0" text="x1">
+                                <Button fx:id="speedButtonx1" mnemonicParsing="false" onAction="#speedButtonController"
+                                        prefWidth="50.0" text="x1">
                                     <HBox.margin>
                                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
                                     </HBox.margin>
                                 </Button>
                                 <Button fx:id="speedButtonx2" layoutX="213.0" layoutY="15.0" mnemonicParsing="false"
-                                        prefWidth="50.0" text="x2">
+                                        onAction="#speedButtonController" prefWidth="50.0" text="x2">
                                     <HBox.margin>
                                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
                                     </HBox.margin>
                                 </Button>
-                                <Button fx:id="speedButtonx4" mnemonicParsing="false" prefWidth="50.0" text="x4">
+                                <Button fx:id="speedButtonx4" mnemonicParsing="false" onAction="#speedButtonController"
+                                        prefWidth="50.0" text="x4">
                                     <HBox.margin>
                                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
                                     </HBox.margin>
                                 </Button>
-                                <Button fx:id="speedButtonx8" mnemonicParsing="false" prefWidth="50.0" text="x8">
+                                <Button fx:id="speedButtonx8" mnemonicParsing="false" onAction="#speedButtonController"
+                                        prefWidth="50.0" text="x8">
                                     <HBox.margin>
                                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
                                     </HBox.margin>
                                 </Button>
-                                <Button fx:id="speedButtonx16" mnemonicParsing="false" prefWidth="50.0" text="x16">
+                                <Button fx:id="speedButtonx16" mnemonicParsing="false" onAction="#speedButtonController"
+                                        prefWidth="50.0" text="x16">
                                     <HBox.margin>
                                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
                                     </HBox.margin>
                                 </Button>
-                                <Button fx:id="speedButtonx32" mnemonicParsing="false" prefWidth="50.0" text="x32">
+                                <Button fx:id="speedButtonx32" mnemonicParsing="false" onAction="#speedButtonController"
+                                        prefWidth="50.0" text="x32">
                                     <HBox.margin>
                                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
                                     </HBox.margin>
@@ -308,8 +309,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep0Line0" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep0Line0" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -340,8 +342,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep0Line1" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep0Line1" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -372,8 +375,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep0Line2" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep0Line2" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -404,8 +408,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep0Line3" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep0Line3" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -436,8 +441,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep0Line4" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep0Line4" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -468,8 +474,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep0Line5" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep0Line5" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -500,8 +507,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep0Line6" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep0Line6" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -542,8 +550,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep1Line0" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep1Line0" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -574,8 +583,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep1Line1" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep1Line1" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -606,8 +616,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep1Line2" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep1Line2" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -638,8 +649,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep1Line3" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep1Line3" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -670,8 +682,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep1Line4" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep1Line4" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -702,8 +715,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep1Line5" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep1Line5" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -734,8 +748,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep1Line6" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep1Line6" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -776,8 +791,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep2Line0" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep2Line0" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -808,8 +824,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep2Line1" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep2Line1" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -840,8 +857,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep2Line2" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep2Line2" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -872,8 +890,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep2Line3" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep2Line3" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -904,8 +923,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep2Line4" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep2Line4" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -936,8 +956,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep2Line5" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep2Line5" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -968,8 +989,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep2Line6" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep2Line6" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1010,8 +1032,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep3Line0" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep3Line0" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1042,8 +1065,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep3Line1" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep3Line1" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1074,8 +1098,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep3Line2" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep3Line2" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1106,8 +1131,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep3Line3" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep3Line3" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1138,8 +1164,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep3Line4" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep3Line4" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1170,8 +1197,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep3Line5" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep3Line5" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1202,8 +1230,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep3Line6" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep3Line6" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1244,8 +1273,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep4Line0" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep4Line0" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1276,8 +1306,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep4Line1" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep4Line1" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1308,8 +1339,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep4Line2" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep4Line2" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1340,8 +1372,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep4Line3" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep4Line3" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1372,8 +1405,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep4Line4" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep4Line4" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1404,8 +1438,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep4Line5" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep4Line5" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1436,8 +1471,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep4Line6" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep4Line6" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1478,8 +1514,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep5Line0" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep5Line0" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1510,8 +1547,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep5Line1" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep5Line1" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1542,8 +1580,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep5Line2" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep5Line2" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1574,8 +1613,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep5Line3" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep5Line3" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1606,8 +1646,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep5Line4" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep5Line4" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1638,8 +1679,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep5Line5" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep5Line5" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1670,8 +1712,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep5Line6" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep5Line6" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1712,8 +1755,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep6Line0" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep6Line0" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1744,8 +1788,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep6Line1" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep6Line1" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1776,8 +1821,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep6Line2" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep6Line2" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1808,8 +1854,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep6Line3" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep6Line3" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1840,8 +1887,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep6Line4" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep6Line4" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1872,8 +1920,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep6Line5" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep6Line5" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
@@ -1904,8 +1953,9 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>
                                         </ProgressBar>
-                                        <Button fx:id="buttonUpgradeDep6Line6" mnemonicParsing="false" prefHeight="50.0"
-                                                prefWidth="200.0" text="Ulepsz za: 10000&#10;">
+                                        <Button fx:id="buttonUpgradeDep6Line6" mnemonicParsing="false"
+                                                onAction="#upgradeButtonControler" prefHeight="50.0" prefWidth="200.0"
+                                                text="Ulepsz za: 10000&#10;">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0"/>
                                             </VBox.margin>

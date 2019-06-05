@@ -24,9 +24,8 @@ public class Timer extends Thread  {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-
             globalTime += 1;
+
             //System.out.println("Global time: "+globalTime);
 
 

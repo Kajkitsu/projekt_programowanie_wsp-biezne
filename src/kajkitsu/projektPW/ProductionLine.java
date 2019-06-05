@@ -62,11 +62,13 @@ public class ProductionLine extends Thread {
         actualResources=0;
         while (actualResources<tank.getRequiredResourcesFromDepartment(department)){
             try {
-                Thread.sleep(100/game.getSpeed());
+                Thread.sleep(100 / game.getSpeed());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            actualResources+=levelEfficiency;
+            actualResources += levelEfficiency;
+
+
         }
     }
 
@@ -126,6 +128,15 @@ public class ProductionLine extends Thread {
                         this.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                    }
+                }
+                synchronized (queueToThisDepartment) {
+                    while (queueToThisDepartment.IsEmpty()) {
+                        try {
+                            queueToThisDepartment.wait();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
                 this.setBusy(true);

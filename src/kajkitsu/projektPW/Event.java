@@ -39,7 +39,10 @@ public class Event extends Thread {
                     game.BuyUpgradeForLineFrom(1, ID);
                 }
                 if (type == 4) {
-                    game.BuyUpgradeForLineFrom(2, ID);
+                    for (int i = 0; i < 100; i++) {
+                        Tank tank = new Tank(new int[]{100, 100, 100, 100, 100, 100, 100}, "test-Tank:" + i, 10000);
+                        game.AddTankToGame(tank);
+                    }
                 }
 
             }
