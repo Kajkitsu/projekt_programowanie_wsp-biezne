@@ -1,4 +1,6 @@
-package kajkitsu.projektPW;
+package kajkitsu.projektPW.logic;
+
+import kajkitsu.projektPW.Game;
 
 public class SellProductionLine extends ProductionLine {
 

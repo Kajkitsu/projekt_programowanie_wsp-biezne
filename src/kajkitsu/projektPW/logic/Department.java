@@ -1,4 +1,6 @@
-package kajkitsu.projektPW;
+package kajkitsu.projektPW.logic;
+
+import kajkitsu.projektPW.Game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +52,7 @@ public class Department {
     public void sendSigToUpgrade(int line) {
         ProductionLine productionLine = getLine(line);
 
-        System.out.println("TEST 3!" + productionLine.isUpgrading());
+        //System.out.println("TEST 3!" + productionLine.isUpgrading());
         productionLine.setUpgrading(true);
 
 

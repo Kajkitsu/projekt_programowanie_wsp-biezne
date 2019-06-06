@@ -1,4 +1,4 @@
-package kajkitsu.projektPW;
+package kajkitsu.projektPW.logic;
 
 import java.util.ArrayList;
 import java.util.List;

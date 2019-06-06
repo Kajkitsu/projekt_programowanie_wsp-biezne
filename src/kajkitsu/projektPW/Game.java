@@ -1,5 +1,7 @@
 package kajkitsu.projektPW;
 
+import kajkitsu.projektPW.logic.*;
+
 public class Game {
     private int speed;
     private Money money;
@@ -13,6 +15,9 @@ public class Game {
         this.money = new Money(money);
         this.soldTank = 0;
         this.queueToDepartment = queueToDepartment;
+
+        AutoTankAdder autoTankAdder = new AutoTankAdder(this);
+
     }
 
     public int getSpeed() {
@@ -106,13 +111,13 @@ public class Game {
 
         if (departments[dep].getLine(line) != null) {
             ProductionLine productionLine = departments[dep].getLine(line);
-            System.out.println("TEST 1!");
+            //System.out.println("TEST 1!");
             if (this.TakeMoney(productionLine.getLevelCost()) &&
                     productionLine.getActualLevel() < departments[dep].getMaxLevel() &&
                     !productionLine.isUpgrading()
             ) {
                 departments[dep].sendSigToUpgrade(line);
-                System.out.println("TEST 3!");
+                //System.out.println("TEST 3!");
             }
 
 
@@ -158,14 +163,14 @@ public class Game {
     }
 
     public Tank getNewTank(int ID) {
-        int level = this.getLevelGame();
+        int level = this.getLevelGame() + 1;
         int[] req = new int[]{level * 100, level * 100, level * 100, level * 100, level * 100, level * 100, level * 100};
 
         req[level % 7] *= 3;
         req[(level + 3) % 7] *= 2;
         req[(level + 6) % 7] *= 4;
 
-        return new Tank(req, "Tank l" + level + " Sn:" + ID, (int) Math.pow(10, level));
+        return new Tank(req, "Tank l" + level + " Sn:" + ID, level * 100);
 
     }
 

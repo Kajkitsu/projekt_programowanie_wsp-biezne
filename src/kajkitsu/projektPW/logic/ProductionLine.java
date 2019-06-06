@@ -1,4 +1,6 @@
-package kajkitsu.projektPW;
+package kajkitsu.projektPW.logic;
+
+import kajkitsu.projektPW.Game;
 
 public class ProductionLine extends Thread {
     protected int ID=0;
@@ -124,7 +126,7 @@ public class ProductionLine extends Thread {
                         e.printStackTrace();
                     }
                 }
-                System.out.println("isUpgrading" + isUpgrading());
+                //System.out.println("isUpgrading" + isUpgrading());
                 if (this.isUpgrading()) {
                     upgrade();
                 }

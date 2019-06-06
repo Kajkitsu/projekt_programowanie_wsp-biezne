@@ -1,4 +1,4 @@
-package kajkitsu.projektPW;
+package kajkitsu.projektPW.logic;
 
 public class Money {
     private long money;

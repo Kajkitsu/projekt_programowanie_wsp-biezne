@@ -1,4 +1,4 @@
-package kajkitsu.projektPW;
+package kajkitsu.projektPW.gui;
 
 
 import javafx.event.ActionEvent;
@@ -7,6 +7,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.text.Text;
+import kajkitsu.projektPW.Game;
+import kajkitsu.projektPW.logic.Money;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -304,7 +306,7 @@ public class Controller implements Initializable {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
                 upgradeButton[dep][line].setDisable(line != 0);
-                upgradeButton[dep][line].setText((line == 0) ? ("Buy for: " + Money.getStringFromLong(game.getNewLineCost(dep))) : ("Blocked"));
+                upgradeButton[dep][line].setText((line == 0) ? ("Kup za: " + Money.getStringFromLong(game.getNewLineCost(dep))) : ("Zablokowany"));
             }
         }
     }
@@ -381,7 +383,7 @@ public class Controller implements Initializable {
     public void updateProgressBarsLines() {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
-                if (upgradeButton[dep][line].getText().contains("Upgrade")) {
+                if (upgradeButton[dep][line].getText().contains("Ulepsz")) {
                     progressBar[dep][line].setProgress(game.getLineProgress(dep, line));
                 }
             }
@@ -401,17 +403,17 @@ public class Controller implements Initializable {
     public void updateButtonLines() {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
-                if (upgradeButton[dep][line].getText().contains("Buy")) {
-                    upgradeButton[dep][line].setText("Buy for: " + Money.getStringFromLong(game.getNewLineCost(dep)));
+                if (upgradeButton[dep][line].getText().contains("Kup")) {
+                    upgradeButton[dep][line].setText("Kup za: " + Money.getStringFromLong(game.getNewLineCost(dep)));
                     if (game.getMoney() < game.getNewLineCost(dep)) upgradeButton[dep][line].setDisable(true);
                     else upgradeButton[dep][line].setDisable(false);
                 }
-                if (upgradeButton[dep][line].getText().contains("Upgrade")) {
+                if (upgradeButton[dep][line].getText().contains("Ulepsz")) {
                     if (game.isOnMaxLevel(dep, line)) {
-                        upgradeButton[dep][line].setText("Max level");
+                        upgradeButton[dep][line].setText("Maksymalny level");
                         upgradeButton[dep][line].setDisable(true);
                     } else {
-                        upgradeButton[dep][line].setText("Upgrade for: " + Money.getStringFromLong(game.getUpgradeLineCost(dep, line)));
+                        upgradeButton[dep][line].setText("Ulepsz za: " + Money.getStringFromLong(game.getUpgradeLineCost(dep, line)));
                         if (game.getIsLineUpgrading(dep, line) || game.getMoney() < game.getUpgradeLineCost(dep, line))
                             upgradeButton[dep][line].setDisable(true);
                         else upgradeButton[dep][line].setDisable(false);
@@ -425,17 +427,17 @@ public class Controller implements Initializable {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
                 if (e.getSource() == upgradeButton[dep][line]) {
-                    if (upgradeButton[dep][line].getText().contains("Buy")) {
+                    if (upgradeButton[dep][line].getText().contains("Kup")) {
                         if (game.BuyNewLineToDepartment(dep)) {
                             if (line < 6) {
-                                upgradeButton[dep][line + 1].setText("Buy for: " + Money.getStringFromLong(game.getNewLineCost(dep)));
+                                upgradeButton[dep][line + 1].setText("Kup za: " + Money.getStringFromLong(game.getNewLineCost(dep)));
                                 upgradeButton[dep][line + 1].setDisable(true);
                             }
-                            upgradeButton[dep][line].setText("Upgrade for: " + Money.getStringFromLong(game.getUpgradeLineCost(dep, line)));
+                            upgradeButton[dep][line].setText("Ulepsz za: " + Money.getStringFromLong(game.getUpgradeLineCost(dep, line)));
                             upgradeButton[dep][line].setDisable(true);
                         }
 
-                    } else if (upgradeButton[dep][line].getText().contains("Upgrade")) {
+                    } else if (upgradeButton[dep][line].getText().contains("Ulepsz")) {
                         game.BuyUpgradeForLineFrom(dep, line);
                         upgradeButton[dep][line].setDisable(true);
 
@@ -468,10 +470,10 @@ public class Controller implements Initializable {
     }
 
     public void updateTextLeftStats() {
-        moneyText.setText("Money: " + Money.getStringFromLong(game.getMoney()));
-        levelText.setText("Level: " + game.getLevelGame());
-        tankProducedText.setText("Tank produced: " + game.getSoldTank());
-        queueTankProductionText.setText("Queue to factory: " + game.getQueueToDepartment(0));
+        moneyText.setText("Pieniadze: " + Money.getStringFromLong(game.getMoney()));
+        levelText.setText("Poziom gry: " + game.getLevelGame());
+        tankProducedText.setText("Liczba wyprodukownych czołgów: " + game.getSoldTank());
+        queueTankProductionText.setText("Kolejka do fabryki: " + game.getQueueToDepartment(0));
 
     }
 

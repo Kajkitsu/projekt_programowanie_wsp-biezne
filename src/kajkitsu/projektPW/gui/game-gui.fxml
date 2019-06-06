@@ -12,7 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="360.0" maxWidth="1410.0" minHeight="360.0" minWidth="1410.0" pickOnBounds="false" prefHeight="360.0" prefWidth="1410.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kajkitsu.projektPW.Controller">
+<VBox maxHeight="360.0" maxWidth="1410.0" minHeight="360.0" minWidth="1410.0" pickOnBounds="false" prefHeight="360.0"
+      prefWidth="1410.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="kajkitsu.projektPW.gui.Controller">
     <children>
         <Separator prefWidth="200.0" />
         <HBox prefHeight="177.0" prefWidth="1382.0">
@@ -21,7 +23,8 @@
                     <children>
                         <HBox prefHeight="31.0" prefWidth="479.0">
                             <children>
-                                <Text fx:id="speedText" strokeType="OUTSIDE" strokeWidth="0.0" text="Speed: " wrappingWidth="88.0">
+                                <Text fx:id="speedText" strokeType="OUTSIDE" strokeWidth="0.0" text="Szybkość: "
+                                      wrappingWidth="118.0">
                                     <font>
                                         <Font size="22.0" />
                                     </font>
@@ -61,7 +64,8 @@
                                 </Button>
                             </children>
                         </HBox>
-                        <Text fx:id="moneyText" strokeType="OUTSIDE" strokeWidth="0.0" text="Money: 0" wrappingWidth="480.0">
+                        <Text fx:id="moneyText" strokeType="OUTSIDE" strokeWidth="0.0" text="Pieniadze: 0"
+                              wrappingWidth="480.0">
                             <font>
                                 <Font size="22.0" />
                             </font>
@@ -91,6 +95,15 @@
                             </font>
                             <VBox.margin>
                                 <Insets bottom="2.0" left="10.0" right="2.0" top="2.0" />
+                            </VBox.margin>
+                        </Text>
+                        <Text fx:id="timeText" layoutX="20.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0"
+                              text="Czas: 0" wrappingWidth="500.0">
+                            <font>
+                                <Font size="22.0"/>
+                            </font>
+                            <VBox.margin>
+                                <Insets bottom="2.0" left="10.0" right="2.0" top="2.0"/>
                             </VBox.margin>
                         </Text>
                     </children>
@@ -341,7 +354,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -370,7 +383,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -399,7 +412,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -428,7 +441,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -457,7 +470,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -486,7 +499,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -515,7 +528,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -554,7 +567,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -583,7 +596,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -612,7 +625,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -641,7 +654,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -670,7 +683,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -699,7 +712,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -728,7 +741,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -767,7 +780,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -796,7 +809,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -825,7 +838,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -854,7 +867,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -883,7 +896,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -912,7 +925,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -941,7 +954,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -980,7 +993,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1009,7 +1022,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1038,7 +1051,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1067,7 +1080,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1096,7 +1109,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1125,7 +1138,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1154,7 +1167,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1193,7 +1206,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1222,7 +1235,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1251,7 +1264,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1280,7 +1293,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1309,7 +1322,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1338,7 +1351,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1367,7 +1380,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1406,7 +1419,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1435,7 +1448,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1464,7 +1477,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1493,7 +1506,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1522,7 +1535,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1551,7 +1564,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1580,7 +1593,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1619,7 +1632,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1648,7 +1661,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1677,7 +1690,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1706,7 +1719,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1735,7 +1748,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1764,7 +1777,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
@@ -1793,7 +1806,7 @@
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>
                                         </Text>
-                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres czołgu:">
+                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Progres produkcji:">
                                             <VBox.margin>
                                                 <Insets bottom="1.0" left="5.0" right="5.0" top="1.0" />
                                             </VBox.margin>

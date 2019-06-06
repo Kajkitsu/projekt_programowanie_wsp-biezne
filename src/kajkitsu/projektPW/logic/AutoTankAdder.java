@@ -1,4 +1,6 @@
-package kajkitsu.projektPW;
+package kajkitsu.projektPW.logic;
+
+import kajkitsu.projektPW.Game;
 
 public class AutoTankAdder extends Thread {
     Game game;
@@ -12,6 +14,11 @@ public class AutoTankAdder extends Thread {
 
     @Override
     public void run() {
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         do {
 
             try {

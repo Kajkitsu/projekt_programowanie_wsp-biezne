@@ -1,4 +1,6 @@
-package kajkitsu.projektPW;
+package kajkitsu.projektPW.test;
+
+import kajkitsu.projektPW.Game;
 
 public class MyTimer extends Thread {
     private int globalTime;

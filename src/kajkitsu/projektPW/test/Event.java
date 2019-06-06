@@ -1,4 +1,7 @@
-package kajkitsu.projektPW;
+package kajkitsu.projektPW.test;
+
+import kajkitsu.projektPW.Game;
+import kajkitsu.projektPW.logic.Tank;
 
 public class Event extends Thread {
     Game game;

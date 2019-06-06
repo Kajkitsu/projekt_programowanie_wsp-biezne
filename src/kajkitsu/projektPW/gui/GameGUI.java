@@ -1,4 +1,4 @@
-package kajkitsu.projektPW;
+package kajkitsu.projektPW.gui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -6,17 +6,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import kajkitsu.projektPW.Game;
+import kajkitsu.projektPW.RunGame;
+import kajkitsu.projektPW.gui.Controller;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class GameGUI extends Application {
 
+    static Game game;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        RunGame runGame = new RunGame();
-        Game game = runGame.runGame();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game-gui.fxml"));
         Parent root = (Parent) loader.load();
@@ -55,8 +58,10 @@ public class GameGUI extends Application {
     }
 
 
-    public static void main(String[] args) {
-        launch(args);
+    public static void runGui(Game ngame) {
+        game = ngame;
+        launch();
+
 
     }
 }
