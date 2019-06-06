@@ -16,8 +16,8 @@ public class Tank {
     }
 
 
-    public int getRequiredResourcesFromDepartment(Department department) {
-        return requiredResourcesFromDepartment[department.getIDOfDepartment()];
+    public int getRequiredResourcesFromDepartment(int dep) {
+        return requiredResourcesFromDepartment[dep];
     }
 
     public String getName() {

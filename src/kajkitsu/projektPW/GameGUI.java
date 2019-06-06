@@ -1,10 +1,14 @@
 package kajkitsu.projektPW;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GameGUI extends Application {
 
@@ -22,6 +26,29 @@ public class GameGUI extends Application {
         primaryStage.setTitle("ProjektPW github.com/Kajkitsu");
         primaryStage.setScene(new Scene(root, 1410, 380));
         primaryStage.show();
+
+//        Timer timer = new Timer();
+//        timer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                controller.updateButtonUpgrade();
+//            }
+//        }, 0, 100);
+
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    controller.updateController();
+                });
+            }
+        }, 1000, 100);
+
+
+
+
 
 
     }

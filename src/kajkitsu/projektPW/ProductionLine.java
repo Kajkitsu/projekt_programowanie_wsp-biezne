@@ -4,16 +4,18 @@ public class ProductionLine extends Thread {
     protected int ID=0;
     protected int actualLevel;
     protected int maxLevel;
-    protected int levelCost;
+    protected long levelCost;
     protected Department department;
-    protected int levelEfficiency;
-    protected int actualResources;
+    protected long levelEfficiency;
+    protected long actualResources;
     protected boolean isBusy;
+    protected boolean isUpgrading;
     protected Tank tankInDepartment;
     protected int tanksServiced=0;
     protected Game game;
     protected QueueToDepartment queueToThisDepartment;
     protected QueueToDepartment queueToNextDepartment;
+    protected double progress;
 
     public ProductionLine(Department department, Game game, int maxLevel) {
         this.department = department;
@@ -23,53 +25,45 @@ public class ProductionLine extends Thread {
         this.tankInDepartment = null;
         this.maxLevel = maxLevel;
 
+        this.isUpgrading = false;
         this.actualLevel = 0;
-        this.levelEfficiency = (int) Math.pow(2, actualLevel) * 10;
-        this.levelCost = (int) Math.pow(4, actualLevel) * 10000;
+        this.progress = 0.0;
+        this.levelEfficiency = (long) Math.pow(1.2, actualLevel) * 10L;
+        this.levelCost = (long) Math.pow(1.5, actualLevel) * 1000L;
     }
 
 
-    public boolean Upgrade() {
-        System.out.println("TEST 5!");
-        synchronized (this){
-            while(this.isBusy()) {
-                try {
-                    this.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            this.setBusy(true);
-            System.out.println("TEST 6!");
-
-            if (actualLevel < maxLevel) {
-                actualLevel++;
-                //System.out.println("|||||||||||||||||||||||||||UpgradeLine||||||||||||||||||||||||||||||||||");
-                levelEfficiency = (int) Math.pow(2, actualLevel) * 10;
-                levelCost = (int) Math.pow(4, actualLevel) * 10000;
-            }
-
-            this.setBusy(false);
-
-            this.notifyAll();
+    public void upgrade() {
+        if (actualLevel < maxLevel) {
+            actualLevel++;
+            //System.out.println("|||||||||||||||||||||||||||UpgradeLine||||||||||||||||||||||||||||||||||");
+            levelEfficiency = (long) Math.pow(1.2, actualLevel) * 10L;
+            levelCost = (long) Math.pow(1.5, actualLevel) * 1000L;
         }
-
-        return true;
+        this.setUpgrading(false);
     }
+
+
+
 
     protected void CollectingResources(Tank tank) {
         //System.out.println(this.toString());
         actualResources=0;
-        while (actualResources<tank.getRequiredResourcesFromDepartment(department)){
+        int requiredResources = tank.getRequiredResourcesFromDepartment(department.getIDOfDepartment());
+        while (actualResources < requiredResources) {
+//            System.out.println("REQ RES: "+requiredResources);
             try {
-                Thread.sleep(100 / game.getSpeed());
+                Thread.sleep(1000 / game.getSpeed());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             actualResources += levelEfficiency;
-
+            progress = (double) actualResources / (double) requiredResources;
+//            System.out.println("actualResources:"+actualResources);
+//            System.out.println("Progress: "+(double)actualResources/(double)requiredResources);
 
         }
+        progress = 0.0;
     }
 
     protected void SendTankToNextQueue(Tank tank){
@@ -130,10 +124,17 @@ public class ProductionLine extends Thread {
                         e.printStackTrace();
                     }
                 }
+                System.out.println("isUpgrading" + isUpgrading());
+                if (this.isUpgrading()) {
+                    upgrade();
+                }
                 synchronized (queueToThisDepartment) {
                     while (queueToThisDepartment.IsEmpty()) {
+                        if (this.isUpgrading()) {
+                            upgrade();
+                        }
                         try {
-                            queueToThisDepartment.wait();
+                            queueToThisDepartment.wait(100);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -153,7 +154,7 @@ public class ProductionLine extends Thread {
         } while (true);
     }
 
-    public int getLevelCost() {
+    public long getLevelCost() {
         return levelCost;
     }
 
@@ -164,6 +165,14 @@ public class ProductionLine extends Thread {
 
     public int getID() {
         return ID;
+    }
+
+    public boolean isUpgrading() {
+        return isUpgrading;
+    }
+
+    public void setUpgrading(boolean upgrading) {
+        isUpgrading = upgrading;
     }
 
     public boolean isBusy() {
@@ -183,14 +192,17 @@ public class ProductionLine extends Thread {
     }
 
 
-    public int getLevelEfficiency() {
+    public long getLevelEfficiency() {
         return levelEfficiency;
     }
 
-    public int getActualResources() {
+    public long getActualResources() {
         return actualResources;
     }
 
+    public double getProgress() {
+        return progress;
+    }
 
     public Game getGame() {
         return game;

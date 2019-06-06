@@ -3,16 +3,16 @@ package kajkitsu.projektPW;
 public class Event extends Thread {
     Game game;
     int type;
-    Timer timer;
+    MyTimer myTimer;
     int timeOfEvent;
     int ID;
 
-    public Event(Game game, int type, int time, int ID, Timer timer) {
+    public Event(Game game, int type, int time, int ID, MyTimer myTimer) {
         this.game = game;
         this.type=type;
         this.timeOfEvent=time;
         this.ID=ID;
-        this.timer=timer;
+        this.myTimer = myTimer;
         this.start();
     }
 
@@ -28,7 +28,7 @@ public class Event extends Thread {
             }
 
 
-            if(timeOfEvent-timer.getGlobalTime()<0){
+            if (timeOfEvent - myTimer.getGlobalTime() < 0) {
                 if(type==1){
                     game.BuyNewLineToDepartment(ID);
                 }
@@ -40,7 +40,7 @@ public class Event extends Thread {
                 }
                 if (type == 4) {
                     for (int i = 0; i < 100; i++) {
-                        Tank tank = new Tank(new int[]{100, 100, 100, 100, 100, 100, 100}, "test-Tank:" + i, 10000);
+                        Tank tank = new Tank(new int[]{1000, 1000, 1000, 1000, 1000, 1000, 1000}, "test-Tank:" + i, 10000);
                         game.AddTankToGame(tank);
                     }
                 }
@@ -48,6 +48,6 @@ public class Event extends Thread {
             }
 
 
-        } while (timer.getGlobalTime()<=timeOfEvent);
+        } while (myTimer.getGlobalTime() <= timeOfEvent);
     }
 }

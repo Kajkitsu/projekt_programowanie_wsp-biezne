@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 public class Controller implements Initializable {
     Game game;
     Button upgradeButton[][];
+    ProgressBar progressBar[][];
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -30,6 +31,15 @@ public class Controller implements Initializable {
         this.game = game;
         this.assignButtons();
         this.initController();
+
+//        UpdateController updateController = new UpdateController(this);
+//        updateController.start();
+    }
+
+    public void updateController() {
+        this.updateButtonUpgrade();
+        this.updateButtonSpeed();
+        this.updateProgressBars();
     }
 
 
@@ -40,14 +50,12 @@ public class Controller implements Initializable {
         if (e.getSource() == speedButtonx8) game.setSpeed(8);
         if (e.getSource() == speedButtonx16) game.setSpeed(16);
         if (e.getSource() == speedButtonx32) game.setSpeed(32);
-
-
     }
 
     public void initController() {
-        this.initUpgradeButtons();
+        this.initButtonsUpgrade();
+        this.assignProgressBars();
     }
-
     public void assignButtons() {
         upgradeButton = new Button[][]{
                 {
@@ -116,40 +124,147 @@ public class Controller implements Initializable {
         };
     }
 
-    public void initUpgradeButtons() {
+    public void initButtonsUpgrade() {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
                 upgradeButton[dep][line].setDisable(line != 0);
-                upgradeButton[dep][line].setText((line == 0) ? ("Buy for: " + game.getNewLineCost(dep)) : ("Blocked"));
+                upgradeButton[dep][line].setText((line == 0) ? ("Buy for: " + Money.getStringMoney(game.getNewLineCost(dep))) : ("Blocked"));
             }
         }
     }
 
+    public void assignProgressBars() {
+        progressBar = new ProgressBar[][]{
+                {
+                        progerssTankDep0Line0,
+                        progerssTankDep0Line1,
+                        progerssTankDep0Line2,
+                        progerssTankDep0Line3,
+                        progerssTankDep0Line4,
+                        progerssTankDep0Line5,
+                        progerssTankDep0Line6
+                },
+                {
+                        progerssTankDep1Line0,
+                        progerssTankDep1Line1,
+                        progerssTankDep1Line2,
+                        progerssTankDep1Line3,
+                        progerssTankDep1Line4,
+                        progerssTankDep1Line5,
+                        progerssTankDep1Line6
+                },
+                {
+                        progerssTankDep2Line0,
+                        progerssTankDep2Line1,
+                        progerssTankDep2Line2,
+                        progerssTankDep2Line3,
+                        progerssTankDep2Line4,
+                        progerssTankDep2Line5,
+                        progerssTankDep2Line6
+                },
+                {
+                        progerssTankDep3Line0,
+                        progerssTankDep3Line1,
+                        progerssTankDep3Line2,
+                        progerssTankDep3Line3,
+                        progerssTankDep3Line4,
+                        progerssTankDep3Line5,
+                        progerssTankDep3Line6
+                },
+                {
+                        progerssTankDep4Line0,
+                        progerssTankDep4Line1,
+                        progerssTankDep4Line2,
+                        progerssTankDep4Line3,
+                        progerssTankDep4Line4,
+                        progerssTankDep4Line5,
+                        progerssTankDep4Line6
+                },
+                {
+                        progerssTankDep5Line0,
+                        progerssTankDep5Line1,
+                        progerssTankDep5Line2,
+                        progerssTankDep5Line3,
+                        progerssTankDep5Line4,
+                        progerssTankDep5Line5,
+                        progerssTankDep5Line6
+                },
+                {
+                        progerssTankDep6Line0,
+                        progerssTankDep6Line1,
+                        progerssTankDep6Line2,
+                        progerssTankDep6Line3,
+                        progerssTankDep6Line4,
+                        progerssTankDep6Line5,
+                        progerssTankDep6Line6
+                },
+        };
 
-    public void upgradeButtonControler(ActionEvent e) {
+    }
+
+    public void updateProgressBars() {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
-                if (e.getTarget() == upgradeButton[dep][line]) {
+                if (upgradeButton[dep][line].getText().contains("Upgrade")) {
+                    progressBar[dep][line].setProgress(game.getProgress(dep, line));
+                }
+            }
+        }
+
+    }
+
+    public void updateButtonSpeed() {
+        speedButtonx1.setDisable(game.getSpeed() == 1);
+        speedButtonx2.setDisable(game.getSpeed() == 2);
+        speedButtonx4.setDisable(game.getSpeed() == 4);
+        speedButtonx8.setDisable(game.getSpeed() == 8);
+        speedButtonx16.setDisable(game.getSpeed() == 16);
+        speedButtonx32.setDisable(game.getSpeed() == 32);
+    }
+
+    public void updateButtonUpgrade() {
+        for (int dep = 0; dep < 7; dep++) {
+            for (int line = 0; line < 7; line++) {
+                if (upgradeButton[dep][line].getText().contains("Buy")) {
+                    upgradeButton[dep][line].setText("Buy for: " + Money.getStringMoney(game.getNewLineCost(dep)));
+                    if (game.getMoney() < game.getNewLineCost(dep)) upgradeButton[dep][line].setDisable(true);
+                    else upgradeButton[dep][line].setDisable(false);
+                }
+                if (upgradeButton[dep][line].getText().contains("Upgrade")) {
+                    if (game.isOnMaxLevel(dep, line)) {
+                        upgradeButton[dep][line].setText("Max level");
+                        upgradeButton[dep][line].setDisable(true);
+                    } else {
+                        upgradeButton[dep][line].setText("Upgrade for: " + Money.getStringMoney(game.getUpgradeLineCost(dep, line)));
+                        if (game.getIsUpgrading(dep, line) || game.getMoney() < game.getUpgradeLineCost(dep, line))
+                            upgradeButton[dep][line].setDisable(true);
+                        else upgradeButton[dep][line].setDisable(false);
+                    }
+                }
+            }
+        }
+    }
+
+    public void controllerUpgradeButton(ActionEvent e) {
+        for (int dep = 0; dep < 7; dep++) {
+            for (int line = 0; line < 7; line++) {
+                if (e.getSource() == upgradeButton[dep][line]) {
                     if (upgradeButton[dep][line].getText().contains("Buy")) {
-                        game.BuyNewLineToDepartment(dep);
-                        if (line < 6) {
-                            upgradeButton[dep][line + 1].setText("Buy for: " + game.getNewLineCost(dep));
-                            upgradeButton[dep][line].setDisable(false);
+                        if (game.BuyNewLineToDepartment(dep)) {
+                            if (line < 6) {
+                                upgradeButton[dep][line + 1].setText("Buy for: " + Money.getStringMoney(game.getNewLineCost(dep)));
+                                upgradeButton[dep][line + 1].setDisable(true);
+                            }
+                            upgradeButton[dep][line].setText("Upgrade for: " + Money.getStringMoney(game.getUpgradeLineCost(dep, line)));
+                            upgradeButton[dep][line].setDisable(true);
                         }
-                        upgradeButton[dep][line].setText("Upgrade for: " + game.getUpgradeLineCost(dep, line));
-                        upgradeButton[dep][line].setDisable(false);
 
                     } else if (upgradeButton[dep][line].getText().contains("Upgrade")) {
-                        game.BuyUpgradeForLineFrom(line, dep);
-                        if (game.isOnMaxLevel(dep, line)) {
-                            upgradeButton[dep][line].setText("Max level");
-                            upgradeButton[dep][line].setDisable(true);
-                        } else {
-                            upgradeButton[dep][line].setText("Upgrade for: " + game.getUpgradeLineCost(dep, line));
-                            upgradeButton[dep][line].setDisable(false);
-                        }
+                        game.BuyUpgradeForLineFrom(dep, line);
+                        upgradeButton[dep][line].setDisable(true);
 
                     }
+                    return;
 
                 }
             }
@@ -157,83 +272,8 @@ public class Controller implements Initializable {
 
     }
 
-    public void test2(int w) {
-        System.out.println("TEST2S");
-    }
 
 
-    public void test(ActionEvent e) {
-        System.out.println("Action 1: " + e.getTarget());
-        System.out.println("Action 2: " + e.getSource());
-        System.out.println("Action 3: " + e.getEventType());
-        System.out.println("Action 4: " + e.getClass());
-    }
-//
-//    void initControllerSpeed(){
-//        speedButtonPause = new Button("Accept");
-//        speedButtonPause.addEventHandler(MouseEvent.MOUSE_ENTERED,
-//                new EventHandler<MouseEvent>() {
-//                    @Override public void handle(MouseEvent e) {
-//                        System.out.println("TEST");
-//                        game.setSpeed(0);
-//                    }
-//                });
-////        speedButtonPause.setOnAction(new EventHandler<ActionEvent>() {
-////            @Override
-////            public void handle(ActionEvent actionEvent) {
-////                game.setSpeed(0);
-////            }
-////        });
-//        speedButtonx1 = new Button();
-//        speedButtonx1.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                System.out.println("TEST");
-//                game.setSpeed(1);
-//            }
-//        });
-//        speedButtonx2.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                System.out.println("TEST");
-//                game.setSpeed(2);
-//            }
-//        });
-//        speedButtonx4 = new Button();
-//        speedButtonx4.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                game.setSpeed(4);
-//            }
-//        });
-//        speedButtonx8 = new Button();
-//        speedButtonx8.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                game.setSpeed(8);
-//            }
-//        });
-//        speedButtonx16 = new Button();
-//        speedButtonx16.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent mouseEvent) {
-//                game.setSpeed(16);
-//            }
-//        });
-//        speedButtonx16.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                game.setSpeed(16);
-//            }
-//        });
-//        speedButtonx32 = new Button();
-//        speedButtonx32.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent actionEvent) {
-//                game.setSpeed(32);
-//            }
-//        });
-//    }
 
 
     @FXML // fx:id="speedText"

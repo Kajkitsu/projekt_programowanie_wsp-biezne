@@ -1,10 +1,10 @@
 package kajkitsu.projektPW;
 
-public class Timer extends Thread  {
+public class MyTimer extends Thread {
     private int globalTime;
     private Game game;
 
-    Timer(int globalTime, Game game) {
+    MyTimer(int globalTime, Game game) {
         this.globalTime=globalTime;
         this.game = game;
         this.start();

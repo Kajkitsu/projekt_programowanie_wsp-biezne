@@ -1,7 +1,5 @@
 package kajkitsu.projektPW;
 
-import java.util.Random;
-
 public class RunGame {
 
     public RunGame() {
@@ -21,7 +19,7 @@ public class RunGame {
                 new QueueToDepartment(100)
         };
 
-        Game game = new Game(1, 10000000, queues);
+        Game game = new Game(1, 1000000000, queues);
 
         Department[] departments = new Department[]{
                 new Department(0, "Produkcja armat", queues[0], queues[1], 100, 10, game),
@@ -61,37 +59,41 @@ public class RunGame {
 
         System.out.println(game.toString());
 
-        Timer timer = new Timer(0, game);
+        MyTimer myTimer = new MyTimer(0, game);
 
         Event event[] = new Event[]{
-                new Event(game, 4, 50, 1, timer),
+                new Event(game, 4, 50, 1, myTimer),
 
-//                new Event(game, 2, 200, 1, timer),
-//                new Event(game, 1, 600, 1, timer),
-//                new Event(game, 2, 1400, 1, timer),
+                new Event(game, 4, 200, 1, myTimer),
+                new Event(game, 4, 400, 1, myTimer),
+                new Event(game, 4, 600, 1, myTimer)
+
+//                new Event(game, 2, 200, 1, myTimer),
+//                new Event(game, 1, 600, 1, myTimer),
+//                new Event(game, 2, 1400, 1, myTimer),
 //
-//                new Event(game, 2, 400, 2, timer),
-//                new Event(game, 1, 700, 2, timer),
-//                new Event(game, 2, 1500, 2, timer),
+//                new Event(game, 2, 400, 2, myTimer),
+//                new Event(game, 1, 700, 2, myTimer),
+//                new Event(game, 2, 1500, 2, myTimer),
 //
-//                new Event(game, 2, 300, 3, timer),
-//                new Event(game, 2, 1600, 3, timer),
-//                new Event(game, 1, 800, 3, timer),
-//                new Event(game, 3, 2700, 3, timer),
+//                new Event(game, 2, 300, 3, myTimer),
+//                new Event(game, 2, 1600, 3, myTimer),
+//                new Event(game, 1, 800, 3, myTimer),
+//                new Event(game, 3, 2700, 3, myTimer),
 //
-//                new Event(game, 3, 2800, 4, timer),
-//                new Event(game, 1, 900, 4, timer),
-//                new Event(game, 1, 900, 4, timer),
-//                new Event(game, 1, 900, 4, timer),
-//                new Event(game, 4, 2400, 4, timer),
-//                new Event(game, 2, 1700, 4, timer),
+//                new Event(game, 3, 2800, 4, myTimer),
+//                new Event(game, 1, 900, 4, myTimer),
+//                new Event(game, 1, 900, 4, myTimer),
+//                new Event(game, 1, 900, 4, myTimer),
+//                new Event(game, 4, 2400, 4, myTimer),
+//                new Event(game, 2, 1700, 4, myTimer),
 //
-//                new Event(game, 1, 800, 5, timer),
-//                new Event(game, 3, 2900, 5, timer),
-//                new Event(game, 2, 1800, 5, timer),
+//                new Event(game, 1, 800, 5, myTimer),
+//                new Event(game, 3, 2900, 5, myTimer),
+//                new Event(game, 2, 1800, 5, myTimer),
 //
-//                new Event(game, 1, 1900, 6, timer),
-//                new Event(game, 2, 3000, 6, timer)
+//                new Event(game, 1, 1900, 6, myTimer),
+//                new Event(game, 2, 3000, 6, myTimer)
 
 
         };

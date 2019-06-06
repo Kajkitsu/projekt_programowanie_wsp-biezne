@@ -6,7 +6,7 @@ import java.util.List;
 public class Department {
     private int IDOfDepartment;
     private int numberOfProductionLines;
-    private int newProductionLineCost;
+    private long newProductionLineCost;
     private int maxLines;
     private int maxLevel;
     private String name;
@@ -22,9 +22,9 @@ public class Department {
         this.queueToNextDepartment = queueToNextDepartment;
         this.game = game;
         this.maxLevel = maxLevel;
-        this.newProductionLineCost = (int) Math.pow(10, numberOfProductionLines) * 100;
-        this.maxLines = maxLines;
         this.numberOfProductionLines = 0;
+        this.newProductionLineCost = (long) Math.pow(100, numberOfProductionLines);
+        this.maxLines = maxLines;
         listsLine = new ArrayList<>();
     }
 
@@ -32,17 +32,27 @@ public class Department {
     public void AddNewLine() {
         if (numberOfProductionLines < maxLines) {
 
-            this.newProductionLineCost = (int) Math.pow(10, numberOfProductionLines) * 100;
+
             ProductionLine line;
             if (IDOfDepartment == 6) line = new SellProductionLine(this, game, maxLevel);
             else line = new ProductionLine(this, game, maxLevel);
 
             line.setID(numberOfProductionLines);
             numberOfProductionLines++;
+            this.newProductionLineCost = (long) Math.pow(100, numberOfProductionLines);
 
             listsLine.add(line);
             line.start();
         }
+
+    }
+
+    public void sendSigToUpgrade(int line) {
+        ProductionLine productionLine = getLine(line);
+
+        System.out.println("TEST 3!" + productionLine.isUpgrading());
+        productionLine.setUpgrading(true);
+
 
     }
 
@@ -67,7 +77,7 @@ public class Department {
         return queueToNextDepartment;
     }
 
-    public int getNewLineCost() {
+    public long getNewLineCost() {
         return newProductionLineCost;
     }
 

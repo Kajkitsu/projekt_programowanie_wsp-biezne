@@ -26,7 +26,7 @@ public class Game {
     }
 
     public void SellTank(int addMoney) {
-        synchronized (money){
+        synchronized (money) {
             while (money.isMoneyUpdating()) {
                 try {
                     money.wait();
@@ -44,11 +44,24 @@ public class Game {
 
     }
 
-    public int getUpgradeLineCost(int dep, int line) {
+    public long getUpgradeLineCost(int dep, int line) {
         return departments[dep].getLine(line).getLevelCost();
     }
 
-    public int getNewLineCost(int dep) {
+    public double getProgress(int dep, int line) {
+        return departments[dep].getLine(line).getProgress();
+
+    }
+
+    public boolean getIsUpgrading(int dep, int line) {
+        return departments[dep].getLine(line).isUpgrading();
+    }
+
+    public long getMoney() {
+        return money.GetMoney();
+    }
+
+    public long getNewLineCost(int dep) {
         return departments[dep].getNewLineCost();
     }
 
@@ -56,35 +69,37 @@ public class Game {
         return departments[dep].getMaxLevel() == departments[dep].getLine(line).getActualLevel();
     }
 
-    public void BuyUpgradeForLineFrom(int IdLine, int IdDepartment) {
-        System.out.println("TEST 1!");
-        if (departments[IdDepartment].getNumberOfProductionLines() > IdLine) {
-            System.out.println("TEST 1,5!");
-            ProductionLine line = departments[IdDepartment].getLine(IdLine);
-            System.out.println("TEST 2!");
-            if (this.TakeMoney(line.getLevelCost()) &&
-                    line.getActualLevel() < departments[IdDepartment].getMaxLevel()
+    public void BuyUpgradeForLineFrom(int dep, int line) {
 
+        if (departments[dep].getLine(line) != null) {
+            ProductionLine productionLine = departments[dep].getLine(line);
+            System.out.println("TEST 1!");
+            if (this.TakeMoney(productionLine.getLevelCost()) &&
+                    productionLine.getActualLevel() < departments[dep].getMaxLevel() &&
+                    !productionLine.isUpgrading()
             ) {
+                departments[dep].sendSigToUpgrade(line);
                 System.out.println("TEST 3!");
-                line.Upgrade();
             }
+
+
         }
 
     }
 
-    public void BuyNewLineToDepartment(int IdDepartment) {
+    public boolean BuyNewLineToDepartment(int IdDepartment) {
         if (this.TakeMoney(departments[IdDepartment].getNewLineCost()) &&
                 departments[IdDepartment].getNumberOfProductionLines() < departments[IdDepartment].getMaxLines()) {
             departments[IdDepartment].AddNewLine();
-        }
+            return true;
+        } else return false;
     }
 
 
-    public boolean TakeMoney(int takeMoney){
-        if(money.GetMoney()>=takeMoney) {
+    public boolean TakeMoney(long takeMoney) {
+        if (money.GetMoney() >= takeMoney) {
 
-            synchronized (money){
+            synchronized (money) {
                 while (money.isMoneyUpdating()) {
                     try {
                         money.wait();
@@ -105,8 +120,8 @@ public class Game {
 
     }
 
-    public synchronized void AddTankToGame(Tank tank){
-        while (!queueToDepartment[0].GiveTankToQueue(tank)){
+    public synchronized void AddTankToGame(Tank tank) {
+        while (!queueToDepartment[0].GiveTankToQueue(tank)) {
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
@@ -125,8 +140,8 @@ public class Game {
     }
 
 
-    public String Status(){
-        return "Game={"+
+    public String Status() {
+        return "Game={" +
                 " speed=" + speed +
                 ", money=" + money.GetMoney() +
                 ", soldTank=" + soldTank +
