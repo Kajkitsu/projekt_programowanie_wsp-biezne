@@ -24,14 +24,15 @@ public class GameGUI extends Application {
         Controller controller = loader.getController();
         controller.setGame(game);
         primaryStage.setTitle("ProjektPW github.com/Kajkitsu");
-        primaryStage.setScene(new Scene(root, 1410, 380));
+        primaryStage.setScene(new Scene(root, 1410, 360));
+        primaryStage.setResizable(false);
         primaryStage.show();
 
 //        Timer timer = new Timer();
 //        timer.schedule(new TimerTask() {
 //            @Override
 //            public void run() {
-//                controller.updateButtonUpgrade();
+//                controller.updateButtonLines();
 //            }
 //        }, 0, 100);
 

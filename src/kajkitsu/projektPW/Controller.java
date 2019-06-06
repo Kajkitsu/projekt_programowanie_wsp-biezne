@@ -15,6 +15,11 @@ public class Controller implements Initializable {
     Game game;
     Button upgradeButton[][];
     ProgressBar progressBar[][];
+    Text textEfe[][];
+    Text textLevel[][];
+    Text textQueue[];
+    Text textSumEfe[];
+    Text textReq[];
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -29,7 +34,6 @@ public class Controller implements Initializable {
 
     public void setGame(Game game) {
         this.game = game;
-        this.assignButtons();
         this.initController();
 
 //        UpdateController updateController = new UpdateController(this);
@@ -37,26 +41,62 @@ public class Controller implements Initializable {
     }
 
     public void updateController() {
-        this.updateButtonUpgrade();
+        this.updateButtonLines();
         this.updateButtonSpeed();
-        this.updateProgressBars();
+        this.updateProgressBarsLines();
+        this.updateProgressBarsLines();
+        this.updateTextDepartament();
+        this.updateTextLeftStats();
+        this.updateTextRightStats();
     }
 
 
-    public void speedButtonController(ActionEvent e) {
-        if (e.getSource() == speedButtonx1) game.setSpeed(1);
-        if (e.getSource() == speedButtonx2) game.setSpeed(2);
-        if (e.getSource() == speedButtonx4) game.setSpeed(4);
-        if (e.getSource() == speedButtonx8) game.setSpeed(8);
-        if (e.getSource() == speedButtonx16) game.setSpeed(16);
-        if (e.getSource() == speedButtonx32) game.setSpeed(32);
-    }
+
 
     public void initController() {
+
+        this.assignButtonsLines();
+        this.assignProgressBarsLines();
+        this.assignTextDepartament();
+        this.assignTextRightStatus();
+
         this.initButtonsUpgrade();
-        this.assignProgressBars();
+
     }
-    public void assignButtons() {
+
+    public void assignTextRightStatus() {
+        textQueue = new Text[]{
+                textActualQueueDep0,
+                textActualQueueDep1,
+                textActualQueueDep2,
+                textActualQueueDep3,
+                textActualQueueDep4,
+                textActualQueueDep5,
+                textActualQueueDep6
+        };
+
+        textSumEfe = new Text[]{
+                effDep0Text,
+                effDep1Text,
+                effDep2Text,
+                effDep3Text,
+                effDep4Text,
+                effDep5Text,
+                effDep6Text
+        };
+        textReq = new Text[]{
+                tankReqDep0Text,
+                tankReqDep1Text,
+                tankReqDep2Text,
+                tankReqDep3Text,
+                tankReqDep4Text,
+                tankReqDep5Text,
+                tankReqDep6Text
+        };
+
+    }
+
+    public void assignButtonsLines() {
         upgradeButton = new Button[][]{
                 {
                         buttonUpgradeDep0Line0,
@@ -124,16 +164,152 @@ public class Controller implements Initializable {
         };
     }
 
+    public void assignTextDepartament() {
+        textEfe = new Text[][]{
+                {
+                        textEfeDep0Line0,
+                        textEfeDep0Line1,
+                        textEfeDep0Line2,
+                        textEfeDep0Line3,
+                        textEfeDep0Line4,
+                        textEfeDep0Line5,
+                        textEfeDep0Line6
+                },
+                {
+                        textEfeDep1Line0,
+                        textEfeDep1Line1,
+                        textEfeDep1Line2,
+                        textEfeDep1Line3,
+                        textEfeDep1Line4,
+                        textEfeDep1Line5,
+                        textEfeDep1Line6
+                },
+                {
+                        textEfeDep2Line0,
+                        textEfeDep2Line1,
+                        textEfeDep2Line2,
+                        textEfeDep2Line3,
+                        textEfeDep2Line4,
+                        textEfeDep2Line5,
+                        textEfeDep2Line6
+                },
+                {
+                        textEfeDep3Line0,
+                        textEfeDep3Line1,
+                        textEfeDep3Line2,
+                        textEfeDep3Line3,
+                        textEfeDep3Line4,
+                        textEfeDep3Line5,
+                        textEfeDep3Line6
+                },
+                {
+                        textEfeDep4Line0,
+                        textEfeDep4Line1,
+                        textEfeDep4Line2,
+                        textEfeDep4Line3,
+                        textEfeDep4Line4,
+                        textEfeDep4Line5,
+                        textEfeDep4Line6
+                },
+                {
+                        textEfeDep5Line0,
+                        textEfeDep5Line1,
+                        textEfeDep5Line2,
+                        textEfeDep5Line3,
+                        textEfeDep5Line4,
+                        textEfeDep5Line5,
+                        textEfeDep5Line6
+                },
+                {
+                        textEfeDep6Line0,
+                        textEfeDep6Line1,
+                        textEfeDep6Line2,
+                        textEfeDep6Line3,
+                        textEfeDep6Line4,
+                        textEfeDep6Line5,
+                        textEfeDep6Line6
+                }
+        };
+
+        textLevel = new Text[][]{
+                {
+                        textLevelDep0Line0,
+                        textLevelDep0Line1,
+                        textLevelDep0Line2,
+                        textLevelDep0Line3,
+                        textLevelDep0Line4,
+                        textLevelDep0Line5,
+                        textLevelDep0Line6
+                },
+                {
+                        textLevelDep1Line0,
+                        textLevelDep1Line1,
+                        textLevelDep1Line2,
+                        textLevelDep1Line3,
+                        textLevelDep1Line4,
+                        textLevelDep1Line5,
+                        textLevelDep1Line6
+                },
+                {
+                        textLevelDep2Line0,
+                        textLevelDep2Line1,
+                        textLevelDep2Line2,
+                        textLevelDep2Line3,
+                        textLevelDep2Line4,
+                        textLevelDep2Line5,
+                        textLevelDep2Line6
+                },
+                {
+                        textLevelDep3Line0,
+                        textLevelDep3Line1,
+                        textLevelDep3Line2,
+                        textLevelDep3Line3,
+                        textLevelDep3Line4,
+                        textLevelDep3Line5,
+                        textLevelDep3Line6
+                },
+                {
+                        textLevelDep4Line0,
+                        textLevelDep4Line1,
+                        textLevelDep4Line2,
+                        textLevelDep4Line3,
+                        textLevelDep4Line4,
+                        textLevelDep4Line5,
+                        textLevelDep4Line6
+                },
+                {
+                        textLevelDep5Line0,
+                        textLevelDep5Line1,
+                        textLevelDep5Line2,
+                        textLevelDep5Line3,
+                        textLevelDep5Line4,
+                        textLevelDep5Line5,
+                        textLevelDep5Line6
+                },
+                {
+                        textLevelDep6Line0,
+                        textLevelDep6Line1,
+                        textLevelDep6Line2,
+                        textLevelDep6Line3,
+                        textLevelDep6Line4,
+                        textLevelDep6Line5,
+                        textLevelDep6Line6
+                }
+
+        };
+
+    }
+
     public void initButtonsUpgrade() {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
                 upgradeButton[dep][line].setDisable(line != 0);
-                upgradeButton[dep][line].setText((line == 0) ? ("Buy for: " + Money.getStringMoney(game.getNewLineCost(dep))) : ("Blocked"));
+                upgradeButton[dep][line].setText((line == 0) ? ("Buy for: " + Money.getStringFromLong(game.getNewLineCost(dep))) : ("Blocked"));
             }
         }
     }
 
-    public void assignProgressBars() {
+    public void assignProgressBarsLines() {
         progressBar = new ProgressBar[][]{
                 {
                         progerssTankDep0Line0,
@@ -202,11 +378,11 @@ public class Controller implements Initializable {
 
     }
 
-    public void updateProgressBars() {
+    public void updateProgressBarsLines() {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
                 if (upgradeButton[dep][line].getText().contains("Upgrade")) {
-                    progressBar[dep][line].setProgress(game.getProgress(dep, line));
+                    progressBar[dep][line].setProgress(game.getLineProgress(dep, line));
                 }
             }
         }
@@ -222,11 +398,11 @@ public class Controller implements Initializable {
         speedButtonx32.setDisable(game.getSpeed() == 32);
     }
 
-    public void updateButtonUpgrade() {
+    public void updateButtonLines() {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
                 if (upgradeButton[dep][line].getText().contains("Buy")) {
-                    upgradeButton[dep][line].setText("Buy for: " + Money.getStringMoney(game.getNewLineCost(dep)));
+                    upgradeButton[dep][line].setText("Buy for: " + Money.getStringFromLong(game.getNewLineCost(dep)));
                     if (game.getMoney() < game.getNewLineCost(dep)) upgradeButton[dep][line].setDisable(true);
                     else upgradeButton[dep][line].setDisable(false);
                 }
@@ -235,8 +411,8 @@ public class Controller implements Initializable {
                         upgradeButton[dep][line].setText("Max level");
                         upgradeButton[dep][line].setDisable(true);
                     } else {
-                        upgradeButton[dep][line].setText("Upgrade for: " + Money.getStringMoney(game.getUpgradeLineCost(dep, line)));
-                        if (game.getIsUpgrading(dep, line) || game.getMoney() < game.getUpgradeLineCost(dep, line))
+                        upgradeButton[dep][line].setText("Upgrade for: " + Money.getStringFromLong(game.getUpgradeLineCost(dep, line)));
+                        if (game.getIsLineUpgrading(dep, line) || game.getMoney() < game.getUpgradeLineCost(dep, line))
                             upgradeButton[dep][line].setDisable(true);
                         else upgradeButton[dep][line].setDisable(false);
                     }
@@ -252,10 +428,10 @@ public class Controller implements Initializable {
                     if (upgradeButton[dep][line].getText().contains("Buy")) {
                         if (game.BuyNewLineToDepartment(dep)) {
                             if (line < 6) {
-                                upgradeButton[dep][line + 1].setText("Buy for: " + Money.getStringMoney(game.getNewLineCost(dep)));
+                                upgradeButton[dep][line + 1].setText("Buy for: " + Money.getStringFromLong(game.getNewLineCost(dep)));
                                 upgradeButton[dep][line + 1].setDisable(true);
                             }
-                            upgradeButton[dep][line].setText("Upgrade for: " + Money.getStringMoney(game.getUpgradeLineCost(dep, line)));
+                            upgradeButton[dep][line].setText("Upgrade for: " + Money.getStringFromLong(game.getUpgradeLineCost(dep, line)));
                             upgradeButton[dep][line].setDisable(true);
                         }
 
@@ -268,6 +444,42 @@ public class Controller implements Initializable {
 
                 }
             }
+        }
+
+    }
+
+    public void controllerSpeedButton(ActionEvent e) {
+        if (e.getSource() == speedButtonx1) game.setSpeed(1);
+        if (e.getSource() == speedButtonx2) game.setSpeed(2);
+        if (e.getSource() == speedButtonx4) game.setSpeed(4);
+        if (e.getSource() == speedButtonx8) game.setSpeed(8);
+        if (e.getSource() == speedButtonx16) game.setSpeed(16);
+        if (e.getSource() == speedButtonx32) game.setSpeed(32);
+    }
+
+
+    public void updateTextDepartament() {
+        for (int dep = 0; dep < 7; dep++) {
+            for (int line = 0; line < 7; line++) {
+                textLevel[dep][line].setText("Poziom: " + game.getLineLevel(dep, line));
+                textEfe[dep][line].setText("Efektywnosc: " + Money.getStringFromLong(game.getLineEfficiency(dep, line)));
+            }
+        }
+    }
+
+    public void updateTextLeftStats() {
+        moneyText.setText("Money: " + Money.getStringFromLong(game.getMoney()));
+        levelText.setText("Level: " + game.getLevelGame());
+        tankProducedText.setText("Tank produced: " + game.getSoldTank());
+        queueTankProductionText.setText("Queue to factory: " + game.getQueueToDepartment(0));
+
+    }
+
+    public void updateTextRightStats() {
+        for (int dep = 0; dep < 7; dep++) {
+            textQueue[dep].setText("" + game.getQueueToDepartment(dep));
+            textSumEfe[dep].setText(Money.getStringFromLong(game.getDepartmentEfficiency(dep)));
+
         }
 
     }
@@ -309,47 +521,47 @@ public class Controller implements Initializable {
     @FXML // fx:id="queueTankProductionText"
     private Text queueTankProductionText;
 
+    @FXML // fx:id="textActualQueueDep0"
+    private Text textActualQueueDep0; // Value injected by FXMLLoader
+
+    @FXML // fx:id="textActualQueueDep1"
+    private Text textActualQueueDep1; // Value injected by FXMLLoader
+
+    @FXML // fx:id="textActualQueueDep2"
+    private Text textActualQueueDep2; // Value injected by FXMLLoader
+
+    @FXML // fx:id="textActualQueueDep3"
+    private Text textActualQueueDep3; // Value injected by FXMLLoader
+
+    @FXML // fx:id="textActualQueueDep4"
+    private Text textActualQueueDep4; // Value injected by FXMLLoader
+
+    @FXML // fx:id="textActualQueueDep5"
+    private Text textActualQueueDep5; // Value injected by FXMLLoader
+
+    @FXML // fx:id="textActualQueueDep6"
+    private Text textActualQueueDep6; // Value injected by FXMLLoader
+
     @FXML // fx:id="effDep0Text"
-    private Text effDep0Text;
+    private Text effDep0Text; // Value injected by FXMLLoader
 
     @FXML // fx:id="effDep1Text"
-    private Text effDep1Text;
+    private Text effDep1Text; // Value injected by FXMLLoader
 
     @FXML // fx:id="effDep2Text"
-    private Text effDep2Text;
+    private Text effDep2Text; // Value injected by FXMLLoader
 
     @FXML // fx:id="effDep3Text"
-    private Text effDep3Text;
+    private Text effDep3Text; // Value injected by FXMLLoader
 
     @FXML // fx:id="effDep4Text"
-    private Text effDep4Text;
+    private Text effDep4Text; // Value injected by FXMLLoader
 
     @FXML // fx:id="effDep5Text"
-    private Text effDep5Text;
+    private Text effDep5Text; // Value injected by FXMLLoader
 
     @FXML // fx:id="effDep6Text"
-    private Text effDep6Text;
-
-    @FXML // fx:id="tankReqDep0Text"
-    private Text tankReqDep0Text;
-
-    @FXML // fx:id="tankReqDep1Text"
-    private Text tankReqDep1Text;
-
-    @FXML // fx:id="tankReqDep2Text"
-    private Text tankReqDep2Text;
-
-    @FXML // fx:id="tankReqDep3Text"
-    private Text tankReqDep3Text;
-
-    @FXML // fx:id="tankReqDep4Text"
-    private Text tankReqDep4Text;
-
-    @FXML // fx:id="tankReqDep5Text"
-    private Text tankReqDep5Text;
-
-    @FXML // fx:id="tankReqDep6Text"
-    private Text tankReqDep6Text;
+    private Text effDep6Text; // Value injected by FXMLLoader
 
     @FXML // fx:id="textLevelDep0Line0"
     private Text textLevelDep0Line0;
@@ -938,6 +1150,28 @@ public class Controller implements Initializable {
 
     @FXML // fx:id="buttonUpgradeDep6Line6"
     private Button buttonUpgradeDep6Line6;
+
+    @FXML // fx:id="tankReqDep0Text"
+    private Text tankReqDep0Text; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tankReqDep1Text"
+    private Text tankReqDep1Text; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tankReqDep2Text"
+    private Text tankReqDep2Text; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tankReqDep3Text"
+    private Text tankReqDep3Text; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tankReqDep4Text"
+    private Text tankReqDep4Text; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tankReqDep5Text"
+    private Text tankReqDep5Text; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tankReqDep6Text"
+    private Text tankReqDep6Text; // Value injected by FXMLLoader
+
 
 
 }

@@ -16,13 +16,12 @@ public class Money {
 
     }
 
-    public static String getStringMoney(long money) {
-        if (money >= 1000000000000000000L) return money / 1000000000000000000L + "t";
-        if (money >= 1000000000000000L) return money / 1000000000000000L + "B";
-        if (money >= 1000000000000L) return money / 1000000000000L + "b";
-        if (money >= 1000000000) return money / 1000000000 + "M";
-        if (money >= 1000000) return money / 1000000 + "m";
-        if (money >= 1000) return money / 1000 + "k";
+    public static String getStringFromLong(long money) {
+        if (money >= 10000000000000000L) return money / 1000000000000000L + "B";
+        if (money >= 10000000000000L) return money / 1000000000000L + "b";
+        if (money >= 10000000000L) return money / 1000000000L + "M";
+        if (money >= 10000000) return money / 1000000 + "m";
+        if (money >= 10000) return money / 1000 + "k";
         return money + "";
     }
 

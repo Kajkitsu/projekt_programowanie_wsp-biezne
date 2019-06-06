@@ -4,6 +4,7 @@ public class Game {
     private int speed;
     private Money money;
     private int soldTank = 0;
+    private int levelGame = 0;
     private QueueToDepartment queueToDepartment[];
     private Department[] departments;
 
@@ -42,23 +43,55 @@ public class Game {
             money.notifyAll();
         }
 
+        levelGame = (soldTank / 100) + 1;
+
     }
 
     public long getUpgradeLineCost(int dep, int line) {
         return departments[dep].getLine(line).getLevelCost();
     }
 
-    public double getProgress(int dep, int line) {
+    public double getLineProgress(int dep, int line) {
         return departments[dep].getLine(line).getProgress();
 
     }
 
-    public boolean getIsUpgrading(int dep, int line) {
+    public int getLineLevel(int dep, int line) {
+        if (departments[dep].getLine(line) != null) {
+            return departments[dep].getLine(line).getActualLevel();
+        }
+        return 0;
+    }
+
+    public long getLineEfficiency(int dep, int line) {
+        if (departments[dep].getLine(line) != null) {
+            return departments[dep].getLine(line).getLevelEfficiency();
+        }
+        return 0;
+    }
+
+    public long getDepartmentEfficiency(int dep) {
+        long sum = 0;
+        for (int line = 0; line < 7; line++) {
+            sum += this.getLineEfficiency(dep, line);
+        }
+        return sum;
+    }
+
+    public boolean getIsLineUpgrading(int dep, int line) {
         return departments[dep].getLine(line).isUpgrading();
     }
 
     public long getMoney() {
         return money.GetMoney();
+    }
+
+    public int getSoldTank() {
+        return soldTank;
+    }
+
+    public int getQueueToDepartment(int dep) {
+        return departments[dep].getQueueToThisDepartment().getQueueSize();
     }
 
     public long getNewLineCost(int dep) {
@@ -85,6 +118,10 @@ public class Game {
 
         }
 
+    }
+
+    public int getLevelGame() {
+        return levelGame;
     }
 
     public boolean BuyNewLineToDepartment(int IdDepartment) {
@@ -117,6 +154,18 @@ public class Game {
         } else {
             return false;
         }
+
+    }
+
+    public Tank getNewTank(int ID) {
+        int level = this.getLevelGame();
+        int[] req = new int[]{level * 100, level * 100, level * 100, level * 100, level * 100, level * 100, level * 100};
+
+        req[level % 7] *= 3;
+        req[(level + 3) % 7] *= 2;
+        req[(level + 6) % 7] *= 4;
+
+        return new Tank(req, "Tank l" + level + " Sn:" + ID, (int) Math.pow(10, level));
 
     }
 

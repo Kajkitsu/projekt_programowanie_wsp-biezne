@@ -26,10 +26,10 @@ public class ProductionLine extends Thread {
         this.maxLevel = maxLevel;
 
         this.isUpgrading = false;
-        this.actualLevel = 0;
+        this.actualLevel = 1;
         this.progress = 0.0;
-        this.levelEfficiency = (long) Math.pow(1.2, actualLevel) * 10L;
-        this.levelCost = (long) Math.pow(1.5, actualLevel) * 1000L;
+        this.levelEfficiency = (long) Math.pow(1.8, actualLevel) * 10L;
+        this.levelCost = (long) Math.pow(2, actualLevel) * 1000L;
     }
 
 
@@ -37,8 +37,8 @@ public class ProductionLine extends Thread {
         if (actualLevel < maxLevel) {
             actualLevel++;
             //System.out.println("|||||||||||||||||||||||||||UpgradeLine||||||||||||||||||||||||||||||||||");
-            levelEfficiency = (long) Math.pow(1.2, actualLevel) * 10L;
-            levelCost = (long) Math.pow(1.5, actualLevel) * 1000L;
+            levelEfficiency = (long) Math.pow(1.8, actualLevel) * 10L;
+            levelCost = (long) Math.pow(2, actualLevel) * 1000L;
         }
         this.setUpgrading(false);
     }
@@ -129,25 +129,27 @@ public class ProductionLine extends Thread {
                     upgrade();
                 }
                 synchronized (queueToThisDepartment) {
-                    while (queueToThisDepartment.IsEmpty()) {
-                        if (this.isUpgrading()) {
-                            upgrade();
-                        }
+                    while (queueToThisDepartment.IsEmpty() && !this.isUpgrading()) {
                         try {
                             queueToThisDepartment.wait(100);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+                        if (this.isUpgrading()) {
+                            upgrade();
+                        }
                     }
                 }
+
                 this.setBusy(true);
-                tankInDepartment = this.TakeNextTank();
-                if(tankInDepartment!=null){
-                    this.CollectingResources(tankInDepartment);
-                    this.SendTankToNextQueue(tankInDepartment);
+                if (!queueToThisDepartment.IsEmpty()) {
+                    tankInDepartment = this.TakeNextTank();
+                    if (tankInDepartment != null) {
+                        this.CollectingResources(tankInDepartment);
+                        this.SendTankToNextQueue(tankInDepartment);
+                    }
                 }
                 this.setBusy(false);
-
                 this.notifyAll();
             }
 
@@ -173,6 +175,11 @@ public class ProductionLine extends Thread {
 
     public void setUpgrading(boolean upgrading) {
         isUpgrading = upgrading;
+        if (isUpgrading) {
+            synchronized (queueToThisDepartment) {
+                queueToThisDepartment.notifyAll();
+            }
+        }
     }
 
     public boolean isBusy() {

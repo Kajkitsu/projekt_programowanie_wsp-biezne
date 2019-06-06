@@ -76,6 +76,10 @@ public class QueueToDepartment {
         isBusy = busy;
     }
 
+    public int getQueueSize() {
+        return tanksList.size();
+    }
+
     public String Status(){
         return " Queue={" +
                 "maxTanksInQueue= " + maxTanksInQueue +
