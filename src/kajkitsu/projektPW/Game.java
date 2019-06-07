@@ -2,36 +2,82 @@ package kajkitsu.projektPW;
 
 import kajkitsu.projektPW.logic.*;
 
+import java.util.Arrays;
+
 public class Game {
     private int speed;
     private Money money;
-    private int soldTank = 0;
-    private int levelGame = 0;
-    private QueueToDepartment queueToDepartment[];
+    private int countTanksSold;
+    private int levelGame;
+    private QueueToDepartment[] queueToDepartments;
     private Department[] departments;
 
-    public Game(int speed, int money, QueueToDepartment[] queueToDepartment) {
+    public Game(int speed, int money, QueueToDepartment[] queueToDepartments) {
         this.speed = speed;
         this.money = new Money(money);
-        this.soldTank = 0;
-        this.queueToDepartment = queueToDepartment;
+        this.countTanksSold = 0;
+        this.levelGame = 0;
+        this.queueToDepartments = queueToDepartments;
 
-        AutoTankAdder autoTankAdder = new AutoTankAdder(this);
-
+        new AutoTankAdder(this);
     }
 
-    public int getSpeed() {
-        return speed;
+    public synchronized void addTankToGame(Tank tank) {
+        while (!queueToDepartments[0].giveTankToQueue(tank)) {
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
+    public void buyUpgradeForProductionLine(int dep, int line) {
 
-    public void setSpeed(int speed) {
-
-        this.speed = speed;
-
+        if (departments[dep].getLine(line) != null) {
+            ProductionLine productionLine = departments[dep].getLine(line);
+            //System.out.println("TEST 1!");
+            if (this.takeMoney(productionLine.getLevelCost()) &&
+                    productionLine.getActualLevel() < departments[dep].getMaxLevel() &&
+                    !productionLine.isUpgrading()
+            ) {
+                departments[dep].sendSigToUpgrade(line);
+                //System.out.println("TEST 3!");
+            }
+        }
     }
 
-    public void SellTank(int addMoney) {
+    public boolean buyNewProductionLine(int dep) {
+        if (this.takeMoney(departments[dep].getNewLineCost()) &&
+                departments[dep].getNumberOfProductionLines() < departments[dep].getMaxLines()) {
+            departments[dep].addNewProductionLine();
+            return true;
+        } else return false;
+    }
+
+    private boolean takeMoney(long takeMoney) {
+        if (money.getMoney() >= takeMoney) {
+
+            synchronized (money) {
+                while (money.isMoneyUpdating()) {
+                    try {
+                        money.wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                money.setMoneyUpdating(true);
+                money.changeMoney(-takeMoney);
+                money.setMoneyUpdating(false);
+                money.notifyAll();
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void sellTank(int addMoney) {
         synchronized (money) {
             while (money.isMoneyUpdating()) {
                 try {
@@ -41,15 +87,28 @@ public class Game {
                 }
             }
             money.setMoneyUpdating(true);
-            money.ChangeMoney(addMoney);
-            soldTank++;
+            money.changeMoney(addMoney);
+            countTanksSold++;
             money.setMoneyUpdating(false);
 
             money.notifyAll();
         }
 
-        levelGame = (soldTank / 100) + 1;
+        levelGame = (countTanksSold / 100) + 1;
 
+    }
+
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public void setDepartments(Department[] departments) {
+        this.departments = departments;
+    }
+
+    public boolean isOnMaxLevel(int dep, int line) {
+        return departments[dep].getMaxLevel() == departments[dep].getLine(line).getActualLevel();
     }
 
     public long getUpgradeLineCost(int dep, int line) {
@@ -57,7 +116,7 @@ public class Game {
     }
 
     public double getLineProgress(int dep, int line) {
-        return departments[dep].getLine(line).getProgress();
+        return departments[dep].getLine(line).getProgressProduction();
 
     }
 
@@ -88,11 +147,11 @@ public class Game {
     }
 
     public long getMoney() {
-        return money.GetMoney();
+        return money.getMoney();
     }
 
-    public int getSoldTank() {
-        return soldTank;
+    public int getCountTanksSold() {
+        return countTanksSold;
     }
 
     public int getQueueToDepartment(int dep) {
@@ -103,63 +162,18 @@ public class Game {
         return departments[dep].getNewLineCost();
     }
 
-    public boolean isOnMaxLevel(int dep, int line) {
-        return departments[dep].getMaxLevel() == departments[dep].getLine(line).getActualLevel();
-    }
-
-    public void BuyUpgradeForLineFrom(int dep, int line) {
-
-        if (departments[dep].getLine(line) != null) {
-            ProductionLine productionLine = departments[dep].getLine(line);
-            //System.out.println("TEST 1!");
-            if (this.TakeMoney(productionLine.getLevelCost()) &&
-                    productionLine.getActualLevel() < departments[dep].getMaxLevel() &&
-                    !productionLine.isUpgrading()
-            ) {
-                departments[dep].sendSigToUpgrade(line);
-                //System.out.println("TEST 3!");
-            }
-
-
-        }
-
-    }
-
     public int getLevelGame() {
         return levelGame;
     }
 
-    public boolean BuyNewLineToDepartment(int IdDepartment) {
-        if (this.TakeMoney(departments[IdDepartment].getNewLineCost()) &&
-                departments[IdDepartment].getNumberOfProductionLines() < departments[IdDepartment].getMaxLines()) {
-            departments[IdDepartment].AddNewLine();
-            return true;
-        } else return false;
-    }
+    public int getRequiresForNewTanks(int dep) {
+        int level = this.getLevelGame() + 1;
+        int[] req = new int[]{level * 100, level * 100, level * 100, level * 100, level * 100, level * 100, level * 100};
+        req[level % 7] *= 3;
+        req[(level + 3) % 7] *= 2;
+        req[(level + 6) % 7] *= 4;
 
-
-    public boolean TakeMoney(long takeMoney) {
-        if (money.GetMoney() >= takeMoney) {
-
-            synchronized (money) {
-                while (money.isMoneyUpdating()) {
-                    try {
-                        money.wait();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                money.setMoneyUpdating(true);
-                money.ChangeMoney(-takeMoney);
-                money.setMoneyUpdating(false);
-
-                money.notifyAll();
-            }
-            return true;
-        } else {
-            return false;
-        }
-
+        return req[dep];
     }
 
     public Tank getNewTank(int ID) {
@@ -174,31 +188,21 @@ public class Game {
 
     }
 
-    public synchronized void AddTankToGame(Tank tank) {
-        while (!queueToDepartment[0].GiveTankToQueue(tank)) {
-            try {
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    public int getSpeed() {
+        return speed;
     }
-
 
     public Department[] getDepartments() {
         return departments;
     }
 
-    public void setDepartments(Department[] departments) {
-        this.departments = departments;
-    }
 
-
-    public String Status() {
-        return "Game={" +
-                " speed=" + speed +
-                ", money=" + money.GetMoney() +
-                ", soldTank=" + soldTank +
+    public String getStatus() {
+        return "Game{" +
+                "speed=" + speed +
+                ", money=" + Money.getStringFromLong(money.getMoney()) +
+                ", countTanksSold=" + countTanksSold +
+                ", levelGame=" + levelGame +
                 "}";
 
     }
@@ -208,7 +212,10 @@ public class Game {
         return "Game{" +
                 "speed=" + speed +
                 ", money=" + money +
-                ", soldTank=" + soldTank +
+                ", countTanksSold=" + countTanksSold +
+                ", levelGame=" + levelGame +
+                ", queueToDepartments=" + Arrays.toString(queueToDepartments) +
+                ", departments=" + Arrays.toString(departments) +
                 '}';
     }
 }

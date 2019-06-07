@@ -1,7 +1,7 @@
 package kajkitsu.projektPW.logic;
 
 public class Tank {
-    private int requiredResourcesFromDepartment[];
+    private int[] requiredResourcesFromDepartment;
     private int reward;
     private String name;
 
@@ -11,10 +11,9 @@ public class Tank {
         this.reward = reward;
     }
 
-    public int Sell(){
+    public int sell() {
         return reward;
     }
-
 
     public int getRequiredResourcesFromDepartment(int dep) {
         return requiredResourcesFromDepartment[dep];
@@ -23,5 +22,4 @@ public class Tank {
     public String getName() {
         return name;
     }
-
 }

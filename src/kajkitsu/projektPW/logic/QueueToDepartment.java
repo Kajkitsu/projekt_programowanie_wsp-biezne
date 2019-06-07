@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QueueToDepartment {
-    int maxTanksInQueue;
-    List<Tank> tanksList;
-    boolean isBusy=false;
-    boolean isEmpty = true;
-    boolean isFull = false;
+    private int maxTanksInQueue;
+    private List<Tank> tanksList;
+    private boolean isBusy = false;
+    private boolean isEmpty = true;
+    private boolean isFull = false;
 
 
     public QueueToDepartment(int maxTanksInQueue) {
@@ -16,7 +16,7 @@ public class QueueToDepartment {
         this.tanksList = new ArrayList<Tank>();
     }
 
-    public boolean GiveTankToQueue(Tank tank){
+    public boolean giveTankToQueue(Tank tank) {
         if(maxTanksInQueue>tanksList.size()){
             synchronized (this){
                 tanksList.add(tank);
@@ -29,7 +29,7 @@ public class QueueToDepartment {
         } else return false;
     }
 
-    public Tank TakeTankFromQueue(){
+    public Tank takeTankFromQueue() {
         if(tanksList.size()>0){
             Tank tank;
             synchronized (this){
@@ -42,29 +42,15 @@ public class QueueToDepartment {
         } else return null;
     }
 
+    public void setBusy(boolean busy) {
+        isBusy = busy;
+    }
 
-//    public synchronized boolean GiveTankToQueue(Tank tank){
-//        if(maxTanksInQueue>tanksList.size()){
-//            tanksList.add(tank);
-//
-//            return true;
-//        }
-//        else return false;
-//    }
-//
-//    public synchronized Tank TakeTankFromQueue(){
-//        if(tanksList.size()>0){
-//            Tank tank = tanksList.remove(0);
-//            return tank;
-//        }
-//        else return null;
-//    }
-
-    public boolean IsEmpty(){
+    public boolean isEmpty() {
         return isEmpty;
     }
 
-    public boolean IsFull(){
+    public boolean isFull() {
         return isFull;
     }
 
@@ -72,19 +58,17 @@ public class QueueToDepartment {
         return isBusy;
     }
 
-    public void setBusy(boolean busy) {
-        isBusy = busy;
-    }
-
     public int getQueueSize() {
         return tanksList.size();
     }
 
-    public String Status(){
+    public String getStatus() {
         return " Queue={" +
-                "maxTanksInQueue= " + maxTanksInQueue +
-                "isBusy= " + isBusy +
-                ", tanksList.size= " + tanksList.size() +
+                "tanksList.size= " + tanksList.size() +
+                ", isEmpty=" + isEmpty +
+                ", isFull=" + isFull +
+                ", maxTanksInQueue= " + maxTanksInQueue +
+                ", isBusy= " + isBusy +
                 "}";
 
     }
@@ -94,7 +78,9 @@ public class QueueToDepartment {
         return "QueueToDepartment{" +
                 "maxTanksInQueue=" + maxTanksInQueue +
                 ", tanksList=" + tanksList +
+                ", isBusy=" + isBusy +
+                ", isEmpty=" + isEmpty +
+                ", isFull=" + isFull +
                 '}';
     }
-
 }

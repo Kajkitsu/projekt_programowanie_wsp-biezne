@@ -25,10 +25,10 @@ public class RunGame {
         Game game = new Game(1, startMoney, queues);
 
         Department[] departments = new Department[]{
-                new Department(0, "Produkcja armat", queues[0], queues[1], 100, 10, game),
-                new Department(1, "Odlewnia wiez", queues[1], queues[2], 100, 10, game),
-                new Department(2, "Odlewnia kadlubow", queues[2], queues[3], 100, 10, game),
-                new Department(3, "Produkcja motoryki", queues[3], queues[4], 100, 10, game),
+                new Department(0, "Dział produkcji armat", queues[0], queues[1], 100, 10, game),
+                new Department(1, "Dział odlewnii wiez", queues[1], queues[2], 100, 10, game),
+                new Department(2, "Dział odlewnii kadlubow", queues[2], queues[3], 100, 10, game),
+                new Department(3, "Dział produkcji motoryki", queues[3], queues[4], 100, 10, game),
                 new Department(4, "Dzial elektorniki", queues[4], queues[5], 100, 10, game),
                 new Department(5, "Dzial testow", queues[5], queues[6], 100, 10, game),
                 new Department(6, "Dzial sprzedazy", queues[6], null, 100, 10, game),
@@ -39,8 +39,12 @@ public class RunGame {
         Status status = new Status(game);
         status.start();
 
-        GameGUI.runGui(game);
+        GameGUI.startGUI(game);
 
+    }
+
+    public static void exit() {
+        System.exit(1);
     }
 
 }

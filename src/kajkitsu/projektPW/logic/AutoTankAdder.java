@@ -3,7 +3,7 @@ package kajkitsu.projektPW.logic;
 import kajkitsu.projektPW.Game;
 
 public class AutoTankAdder extends Thread {
-    Game game;
+    private Game game;
 
 
     public AutoTankAdder(Game game) {
@@ -30,7 +30,7 @@ public class AutoTankAdder extends Thread {
             if (game.getQueueToDepartment(0) < 10) {
 
                 for (int i = 0; i < 100; i++) {
-                    game.AddTankToGame(game.getNewTank(i));
+                    game.addTankToGame(game.getNewTank(i));
                 }
             }
 

@@ -2,15 +2,15 @@ package kajkitsu.projektPW.logic;
 
 public class Money {
     private long money;
-    boolean isMoneyUpdating = false;
+    private boolean isMoneyUpdating = false;
 
     public Money(int money) {
         this.money = money;
     }
 
-    public boolean ChangeMoney(long change) {
-        if(money+change>=0) {
-            money+=change;
+    public boolean changeMoney(long amount) {
+        if (money + amount >= 0) {
+            money += amount;
             return true;
         } else return false;
 
@@ -25,7 +25,7 @@ public class Money {
         return money + "";
     }
 
-    public long GetMoney() {
+    public long getMoney() {
         return money;
     }
 

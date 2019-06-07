@@ -9,14 +9,13 @@ public class SellProductionLine extends ProductionLine {
     }
 
     @Override
-    protected void SendTankToNextQueue(Tank tank) {
-        game.SellTank(tankInDepartment.Sell());
-        this.tanksServiced++;
+    protected void sendTankToNextQueue(Tank tank) {
+        game.sellTank(tankInProductionLine.sell());
+        this.countTanksServiced++;
     }
 
-
     @Override
-    public void Init(){
+    protected void initQueue() {
         queueToThisDepartment = department.getQueueToThisDepartment();
         queueToNextDepartment = null;
     }

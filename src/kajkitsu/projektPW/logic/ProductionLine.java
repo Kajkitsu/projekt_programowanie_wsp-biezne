@@ -3,42 +3,41 @@ package kajkitsu.projektPW.logic;
 import kajkitsu.projektPW.Game;
 
 public class ProductionLine extends Thread {
-    protected int ID=0;
-    protected int actualLevel;
-    protected int maxLevel;
-    protected long levelCost;
+    private int ID = 0;
+    private int actualLevel;
+    private int maxLevel;
+    private long levelCost;
     protected Department department;
-    protected long levelEfficiency;
-    protected long actualResources;
-    protected boolean isBusy;
-    protected boolean isUpgrading;
-    protected Tank tankInDepartment;
-    protected int tanksServiced=0;
+    private long levelEfficiency;
+    private long actualResources;
+    private boolean isBusy;
+    private boolean isUpgrading;
+    protected Tank tankInProductionLine;
+    protected int countTanksServiced = 0;
     protected Game game;
     protected QueueToDepartment queueToThisDepartment;
     protected QueueToDepartment queueToNextDepartment;
-    protected double progress;
+    private double progressProduction;
 
     public ProductionLine(Department department, Game game, int maxLevel) {
         this.department = department;
         this.actualResources = 0;
         this.isBusy = false;
         this.game = game;
-        this.tankInDepartment = null;
+        this.tankInProductionLine = null;
         this.maxLevel = maxLevel;
 
         this.isUpgrading = false;
         this.actualLevel = 1;
-        this.progress = 0.0;
+        this.progressProduction = 0.0;
         this.levelEfficiency = (long) Math.pow(1.8, actualLevel) * 10L;
         this.levelCost = (long) Math.pow(2, actualLevel) * 1000L;
     }
 
 
-    public void upgrade() {
+    private void upgrade() {
         if (actualLevel < maxLevel) {
             actualLevel++;
-            //System.out.println("|||||||||||||||||||||||||||UpgradeLine||||||||||||||||||||||||||||||||||");
             levelEfficiency = (long) Math.pow(1.8, actualLevel) * 10L;
             levelCost = (long) Math.pow(2, actualLevel) * 1000L;
         }
@@ -46,31 +45,25 @@ public class ProductionLine extends Thread {
     }
 
 
-
-
-    protected void CollectingResources(Tank tank) {
-        //System.out.println(this.toString());
+    private void collectingResources(Tank tank) {
         actualResources=0;
         int requiredResources = tank.getRequiredResourcesFromDepartment(department.getIDOfDepartment());
         while (actualResources < requiredResources) {
-//            System.out.println("REQ RES: "+requiredResources);
             try {
                 Thread.sleep(1000 / game.getSpeed());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             actualResources += levelEfficiency;
-            progress = (double) actualResources / (double) requiredResources;
-//            System.out.println("actualResources:"+actualResources);
-//            System.out.println("Progress: "+(double)actualResources/(double)requiredResources);
+            progressProduction = (double) actualResources / (double) requiredResources;
 
         }
-        progress = 0.0;
+        progressProduction = 0.0;
     }
 
-    protected void SendTankToNextQueue(Tank tank){
+    protected void sendTankToNextQueue(Tank tank) {
         synchronized (queueToNextDepartment){
-            while (queueToNextDepartment.isBusy() || queueToNextDepartment.IsFull()) {
+            while (queueToNextDepartment.isBusy() || queueToNextDepartment.isFull()) {
                 try {
                     queueToNextDepartment.wait();
                 } catch (InterruptedException e) {
@@ -78,19 +71,19 @@ public class ProductionLine extends Thread {
                 }
             }
             queueToNextDepartment.setBusy(true);
-            while (!queueToNextDepartment.GiveTankToQueue(tank)) ;
+            while (!queueToNextDepartment.giveTankToQueue(tank)) ;
             queueToNextDepartment.setBusy(false);
 
             queueToNextDepartment.notifyAll();
         }
-        this.tanksServiced++;
+        this.countTanksServiced++;
 
     }
 
-    protected Tank TakeNextTank(){
+    private Tank takeNextTank() {
         Tank tank = null;
         synchronized (queueToThisDepartment){
-            while (queueToThisDepartment.isBusy() || queueToThisDepartment.IsEmpty()) {
+            while (queueToThisDepartment.isBusy() || queueToThisDepartment.isEmpty()) {
                 try {
                     queueToThisDepartment.wait();
                 } catch (InterruptedException e) {
@@ -98,7 +91,7 @@ public class ProductionLine extends Thread {
                 }
             }
             queueToThisDepartment.setBusy(true);
-            tank=queueToThisDepartment.TakeTankFromQueue();
+            tank = queueToThisDepartment.takeTankFromQueue();
             queueToThisDepartment.setBusy(false);
 
             queueToThisDepartment.notifyAll();
@@ -107,17 +100,16 @@ public class ProductionLine extends Thread {
         return tank;
     }
 
-    protected void Init(){
+    protected void initQueue() {
         queueToThisDepartment = department.getQueueToThisDepartment();
         queueToNextDepartment = department.getQueueToNextDepartment();
-        //System.out.println(this.toString());
     }
 
     @Override
     public void run() {
-        this.Init();
+        this.initQueue();
         do {
-            tankInDepartment=null;
+            tankInProductionLine = null;
             synchronized (this){
                 while(this.isBusy()) {
                     try {
@@ -126,12 +118,11 @@ public class ProductionLine extends Thread {
                         e.printStackTrace();
                     }
                 }
-                //System.out.println("isUpgrading" + isUpgrading());
                 if (this.isUpgrading()) {
                     upgrade();
                 }
                 synchronized (queueToThisDepartment) {
-                    while (queueToThisDepartment.IsEmpty() && !this.isUpgrading()) {
+                    while (queueToThisDepartment.isEmpty() && !this.isUpgrading()) {
                         try {
                             queueToThisDepartment.wait(100);
                         } catch (InterruptedException e) {
@@ -144,11 +135,11 @@ public class ProductionLine extends Thread {
                 }
 
                 this.setBusy(true);
-                if (!queueToThisDepartment.IsEmpty()) {
-                    tankInDepartment = this.TakeNextTank();
-                    if (tankInDepartment != null) {
-                        this.CollectingResources(tankInDepartment);
-                        this.SendTankToNextQueue(tankInDepartment);
+                if (!queueToThisDepartment.isEmpty()) {
+                    tankInProductionLine = this.takeNextTank();
+                    if (tankInProductionLine != null) {
+                        this.collectingResources(tankInProductionLine);
+                        this.sendTankToNextQueue(tankInProductionLine);
                     }
                 }
                 this.setBusy(false);
@@ -156,23 +147,6 @@ public class ProductionLine extends Thread {
             }
 
         } while (true);
-    }
-
-    public long getLevelCost() {
-        return levelCost;
-    }
-
-
-    public void setID(int ID) {
-        this.ID=ID;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public boolean isUpgrading() {
-        return isUpgrading;
     }
 
     public void setUpgrading(boolean upgrading) {
@@ -184,77 +158,79 @@ public class ProductionLine extends Thread {
         }
     }
 
+    public synchronized void setBusy(boolean busy) {
+        isBusy = busy;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public boolean isUpgrading() {
+        return isUpgrading;
+    }
+
     public boolean isBusy() {
         return isBusy;
     }
 
-    public synchronized void setBusy(boolean busy) {
-        isBusy = busy;
+    public long getLevelCost() {
+        return levelCost;
     }
 
     public int getActualLevel() {
         return actualLevel;
     }
 
-    public Department getDepartmentNumber() {
-        return department;
-    }
-
-
     public long getLevelEfficiency() {
         return levelEfficiency;
     }
 
-    public long getActualResources() {
-        return actualResources;
-    }
-
-    public double getProgress() {
-        return progress;
+    public double getProgressProduction() {
+        return progressProduction;
     }
 
     public Game getGame() {
         return game;
     }
 
-
-    public Tank getTankInDepartment() {
-        return tankInDepartment;
-    }
-
-    public int getTanksServiced() {
-        return tanksServiced;
-    }
-
-    public String Status(){
-        return "ProductionLine: ID "+ String.valueOf(department.getIDOfDepartment())+"  "+ department.getName() + String.valueOf(ID)+"={"+
+    public String getStatus() {
+        String tank = (tankInProductionLine != null) ? (tankInProductionLine.getName()) : (null);
+        return "department=\"" + String.valueOf(department.getIDOfDepartment()) + " " + department.getName() + "\"" +
+                " productionLineID=" + String.valueOf(ID) +
+                " ={" +
                 ", aLevel=" + actualLevel +
-                ", efficiency=" + levelEfficiency +
-                ", levelCost=" + levelCost +
-                ", lineCost=" + department.getNewLineCost() +
-                ", iBusy=" + isBusy +
-                ", tank=" + tankInDepartment +
-                ", tServiced=" + tanksServiced +
-                ",numberOfProductionLines= " + department.getNumberOfProductionLines() +
-                ", " + queueToThisDepartment.Status() +
-                "}";
-
+                ", mLevel=" + maxLevel +
+                ", lCost=" + levelCost +
+                ", lEfficiency=" + levelEfficiency +
+                ", aResources=" + actualResources +
+                ", isBusy=" + isBusy +
+                ", isUpgrading=" + isUpgrading +
+                ", tank=" + tank +
+                ", tServiced=" + countTanksServiced +
+                ", queue=" + queueToThisDepartment.getStatus() +
+                ", progressProduction=" + progressProduction +
+                '}';
     }
-
 
     @Override
     public String toString() {
         return "ProductionLine{" +
                 "ID=" + ID +
                 ", actualLevel=" + actualLevel +
+                ", maxLevel=" + maxLevel +
+                ", levelCost=" + levelCost +
+                ", department=" + department +
                 ", levelEfficiency=" + levelEfficiency +
                 ", actualResources=" + actualResources +
                 ", isBusy=" + isBusy +
+                ", isUpgrading=" + isUpgrading +
+                ", tankInProductionLine=" + tankInProductionLine +
+                ", countTanksServiced=" + countTanksServiced +
                 ", game=" + game +
                 ", queueToThisDepartment=" + queueToThisDepartment +
                 ", queueToNextDepartment=" + queueToNextDepartment +
-                ", tankInDepartment=" + tankInDepartment +
-                ", tanksServiced=" + tanksServiced +
+                ", progressProduction=" + progressProduction +
                 '}';
     }
 }

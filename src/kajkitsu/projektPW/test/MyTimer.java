@@ -28,9 +28,6 @@ public class MyTimer extends Thread {
             }
             globalTime += 1;
 
-            //System.out.println("Global time: "+globalTime);
-
-
         } while (true);
     }
 

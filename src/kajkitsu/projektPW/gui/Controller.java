@@ -1,6 +1,5 @@
 package kajkitsu.projektPW.gui;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,60 +13,47 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
-    Game game;
-    Button upgradeButton[][];
-    ProgressBar progressBar[][];
-    Text textEfe[][];
-    Text textLevel[][];
-    Text textQueue[];
-    Text textSumEfe[];
-    Text textReq[];
+    private Game game;
+    private Button[][] buttonUpgradeProductionLineFromDepartment;
+    private ProgressBar[][] progressBarOfTankProduction;
+    private Text[][] textEfficiencyOfProductionLineFromDepartment;
+    private Text[][] textLevelOfProductionLineFromDepartment;
+    private Text[] textQueueToDepartment;
+    private Text[] textEfficiencyOfDepartment;
+    private Text[] textNewTankRequiredResourcesFromDepartment;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
-//    public Controller(Game game) {
-//        this.game = game;
-//
-//        //this.initControllerSpeed();
-//    }
 
     public void setGame(Game game) {
         this.game = game;
         this.initController();
-
-//        UpdateController updateController = new UpdateController(this);
-//        updateController.start();
     }
 
     public void updateController() {
-        this.updateButtonLines();
-        this.updateButtonSpeed();
-        this.updateProgressBarsLines();
-        this.updateProgressBarsLines();
-        this.updateTextDepartament();
+        this.updateButtonUpgradeForProductionLines();
+        this.updateButtonGameSpeed();
+        this.updateProgressBarOfTankProduction();
+        this.updateProgressBarOfTankProduction();
+        this.updateTextForDepartaments();
         this.updateTextLeftStats();
         this.updateTextRightStats();
     }
 
-
-
-
-    public void initController() {
-
-        this.assignButtonsLines();
-        this.assignProgressBarsLines();
-        this.assignTextDepartament();
+    private void initController() {
+        this.assignButtonUpgradeForProductionLines();
+        this.assignProgressBarOfTankProduction();
+        this.assignTextEfficiencyAndLevelForProductionLines();
         this.assignTextRightStatus();
-
-        this.initButtonsUpgrade();
+        this.initButtonUpgradeForProductionLines();
 
     }
 
-    public void assignTextRightStatus() {
-        textQueue = new Text[]{
+    private void assignTextRightStatus() {
+        textQueueToDepartment = new Text[]{
                 textActualQueueDep0,
                 textActualQueueDep1,
                 textActualQueueDep2,
@@ -77,7 +63,7 @@ public class Controller implements Initializable {
                 textActualQueueDep6
         };
 
-        textSumEfe = new Text[]{
+        textEfficiencyOfDepartment = new Text[]{
                 effDep0Text,
                 effDep1Text,
                 effDep2Text,
@@ -86,7 +72,7 @@ public class Controller implements Initializable {
                 effDep5Text,
                 effDep6Text
         };
-        textReq = new Text[]{
+        textNewTankRequiredResourcesFromDepartment = new Text[]{
                 tankReqDep0Text,
                 tankReqDep1Text,
                 tankReqDep2Text,
@@ -98,8 +84,8 @@ public class Controller implements Initializable {
 
     }
 
-    public void assignButtonsLines() {
-        upgradeButton = new Button[][]{
+    private void assignButtonUpgradeForProductionLines() {
+        buttonUpgradeProductionLineFromDepartment = new Button[][]{
                 {
                         buttonUpgradeDep0Line0,
                         buttonUpgradeDep0Line1,
@@ -166,8 +152,8 @@ public class Controller implements Initializable {
         };
     }
 
-    public void assignTextDepartament() {
-        textEfe = new Text[][]{
+    private void assignTextEfficiencyAndLevelForProductionLines() {
+        textEfficiencyOfProductionLineFromDepartment = new Text[][]{
                 {
                         textEfeDep0Line0,
                         textEfeDep0Line1,
@@ -233,7 +219,7 @@ public class Controller implements Initializable {
                 }
         };
 
-        textLevel = new Text[][]{
+        textLevelOfProductionLineFromDepartment = new Text[][]{
                 {
                         textLevelDep0Line0,
                         textLevelDep0Line1,
@@ -302,17 +288,8 @@ public class Controller implements Initializable {
 
     }
 
-    public void initButtonsUpgrade() {
-        for (int dep = 0; dep < 7; dep++) {
-            for (int line = 0; line < 7; line++) {
-                upgradeButton[dep][line].setDisable(line != 0);
-                upgradeButton[dep][line].setText((line == 0) ? ("Kup za: " + Money.getStringFromLong(game.getNewLineCost(dep))) : ("Zablokowany"));
-            }
-        }
-    }
-
-    public void assignProgressBarsLines() {
-        progressBar = new ProgressBar[][]{
+    private void assignProgressBarOfTankProduction() {
+        progressBarOfTankProduction = new ProgressBar[][]{
                 {
                         progerssTankDep0Line0,
                         progerssTankDep0Line1,
@@ -380,18 +357,27 @@ public class Controller implements Initializable {
 
     }
 
-    public void updateProgressBarsLines() {
+    private void initButtonUpgradeForProductionLines() {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
-                if (upgradeButton[dep][line].getText().contains("Ulepsz")) {
-                    progressBar[dep][line].setProgress(game.getLineProgress(dep, line));
+                buttonUpgradeProductionLineFromDepartment[dep][line].setDisable(line != 0);
+                buttonUpgradeProductionLineFromDepartment[dep][line].setText((line == 0) ? ("Kup za: " + Money.getStringFromLong(game.getNewLineCost(dep))) : ("Zablokowany"));
+            }
+        }
+    }
+
+    private void updateProgressBarOfTankProduction() {
+        for (int dep = 0; dep < 7; dep++) {
+            for (int line = 0; line < 7; line++) {
+                if (buttonUpgradeProductionLineFromDepartment[dep][line].getText().contains("Ulepsz")) {
+                    progressBarOfTankProduction[dep][line].setProgress(game.getLineProgress(dep, line));
                 }
             }
         }
 
     }
 
-    public void updateButtonSpeed() {
+    private void updateButtonGameSpeed() {
         speedButtonx1.setDisable(game.getSpeed() == 1);
         speedButtonx2.setDisable(game.getSpeed() == 2);
         speedButtonx4.setDisable(game.getSpeed() == 4);
@@ -400,46 +386,71 @@ public class Controller implements Initializable {
         speedButtonx32.setDisable(game.getSpeed() == 32);
     }
 
-    public void updateButtonLines() {
+    private void updateButtonUpgradeForProductionLines() {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
-                if (upgradeButton[dep][line].getText().contains("Kup")) {
-                    upgradeButton[dep][line].setText("Kup za: " + Money.getStringFromLong(game.getNewLineCost(dep)));
-                    if (game.getMoney() < game.getNewLineCost(dep)) upgradeButton[dep][line].setDisable(true);
-                    else upgradeButton[dep][line].setDisable(false);
+                if (buttonUpgradeProductionLineFromDepartment[dep][line].getText().contains("Kup")) {
+                    buttonUpgradeProductionLineFromDepartment[dep][line].setText("Kup za: " + Money.getStringFromLong(game.getNewLineCost(dep)));
+                    if (game.getMoney() < game.getNewLineCost(dep))
+                        buttonUpgradeProductionLineFromDepartment[dep][line].setDisable(true);
+                    else buttonUpgradeProductionLineFromDepartment[dep][line].setDisable(false);
                 }
-                if (upgradeButton[dep][line].getText().contains("Ulepsz")) {
+                if (buttonUpgradeProductionLineFromDepartment[dep][line].getText().contains("Ulepsz")) {
                     if (game.isOnMaxLevel(dep, line)) {
-                        upgradeButton[dep][line].setText("Maksymalny level");
-                        upgradeButton[dep][line].setDisable(true);
+                        buttonUpgradeProductionLineFromDepartment[dep][line].setText("Maksymalny level");
+                        buttonUpgradeProductionLineFromDepartment[dep][line].setDisable(true);
                     } else {
-                        upgradeButton[dep][line].setText("Ulepsz za: " + Money.getStringFromLong(game.getUpgradeLineCost(dep, line)));
+                        buttonUpgradeProductionLineFromDepartment[dep][line].setText("Ulepsz za: " + Money.getStringFromLong(game.getUpgradeLineCost(dep, line)));
                         if (game.getIsLineUpgrading(dep, line) || game.getMoney() < game.getUpgradeLineCost(dep, line))
-                            upgradeButton[dep][line].setDisable(true);
-                        else upgradeButton[dep][line].setDisable(false);
+                            buttonUpgradeProductionLineFromDepartment[dep][line].setDisable(true);
+                        else buttonUpgradeProductionLineFromDepartment[dep][line].setDisable(false);
                     }
                 }
             }
         }
     }
 
-    public void controllerUpgradeButton(ActionEvent e) {
+    private void updateTextForDepartaments() {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
-                if (e.getSource() == upgradeButton[dep][line]) {
-                    if (upgradeButton[dep][line].getText().contains("Kup")) {
-                        if (game.BuyNewLineToDepartment(dep)) {
+                textLevelOfProductionLineFromDepartment[dep][line].setText("Poziom: " + game.getLineLevel(dep, line));
+                textEfficiencyOfProductionLineFromDepartment[dep][line].setText("Efektywnosc: " + Money.getStringFromLong(game.getLineEfficiency(dep, line)));
+            }
+        }
+    }
+
+    private void updateTextLeftStats() {
+        moneyText.setText("Pieniadze: " + Money.getStringFromLong(game.getMoney()));
+        levelText.setText("Poziom gry: " + game.getLevelGame());
+        tankProducedText.setText("Liczba wyprodukownych czołgów: " + game.getCountTanksSold());
+        queueTankProductionText.setText("Kolejka do fabryki: " + game.getQueueToDepartment(0));
+    }
+
+    private void updateTextRightStats() {
+        for (int dep = 0; dep < 7; dep++) {
+            textQueueToDepartment[dep].setText("" + game.getQueueToDepartment(dep));
+            textEfficiencyOfDepartment[dep].setText(Money.getStringFromLong(game.getDepartmentEfficiency(dep)));
+            textNewTankRequiredResourcesFromDepartment[dep].setText("" + game.getRequiresForNewTanks(dep));
+        }
+    }
+
+    public void controllerButtonUpgradeForProductionLines(ActionEvent e) {
+        for (int dep = 0; dep < 7; dep++) {
+            for (int line = 0; line < 7; line++) {
+                if (e.getSource() == buttonUpgradeProductionLineFromDepartment[dep][line]) {
+                    if (buttonUpgradeProductionLineFromDepartment[dep][line].getText().contains("Kup")) {
+                        if (game.buyNewProductionLine(dep)) {
                             if (line < 6) {
-                                upgradeButton[dep][line + 1].setText("Kup za: " + Money.getStringFromLong(game.getNewLineCost(dep)));
-                                upgradeButton[dep][line + 1].setDisable(true);
+                                buttonUpgradeProductionLineFromDepartment[dep][line + 1].setText("Kup za: " + Money.getStringFromLong(game.getNewLineCost(dep)));
+                                buttonUpgradeProductionLineFromDepartment[dep][line + 1].setDisable(true);
                             }
-                            upgradeButton[dep][line].setText("Ulepsz za: " + Money.getStringFromLong(game.getUpgradeLineCost(dep, line)));
-                            upgradeButton[dep][line].setDisable(true);
+                            buttonUpgradeProductionLineFromDepartment[dep][line].setText("Ulepsz za: " + Money.getStringFromLong(game.getUpgradeLineCost(dep, line)));
+                            buttonUpgradeProductionLineFromDepartment[dep][line].setDisable(true);
                         }
 
-                    } else if (upgradeButton[dep][line].getText().contains("Ulepsz")) {
-                        game.BuyUpgradeForLineFrom(dep, line);
-                        upgradeButton[dep][line].setDisable(true);
+                    } else if (buttonUpgradeProductionLineFromDepartment[dep][line].getText().contains("Ulepsz")) {
+                        game.buyUpgradeForProductionLine(dep, line);
+                        buttonUpgradeProductionLineFromDepartment[dep][line].setDisable(true);
 
                     }
                     return;
@@ -450,7 +461,7 @@ public class Controller implements Initializable {
 
     }
 
-    public void controllerSpeedButton(ActionEvent e) {
+    public void controllerButtonGameSpeed(ActionEvent e) {
         if (e.getSource() == speedButtonx1) game.setSpeed(1);
         if (e.getSource() == speedButtonx2) game.setSpeed(2);
         if (e.getSource() == speedButtonx4) game.setSpeed(4);
@@ -458,36 +469,6 @@ public class Controller implements Initializable {
         if (e.getSource() == speedButtonx16) game.setSpeed(16);
         if (e.getSource() == speedButtonx32) game.setSpeed(32);
     }
-
-
-    public void updateTextDepartament() {
-        for (int dep = 0; dep < 7; dep++) {
-            for (int line = 0; line < 7; line++) {
-                textLevel[dep][line].setText("Poziom: " + game.getLineLevel(dep, line));
-                textEfe[dep][line].setText("Efektywnosc: " + Money.getStringFromLong(game.getLineEfficiency(dep, line)));
-            }
-        }
-    }
-
-    public void updateTextLeftStats() {
-        moneyText.setText("Pieniadze: " + Money.getStringFromLong(game.getMoney()));
-        levelText.setText("Poziom gry: " + game.getLevelGame());
-        tankProducedText.setText("Liczba wyprodukownych czołgów: " + game.getSoldTank());
-        queueTankProductionText.setText("Kolejka do fabryki: " + game.getQueueToDepartment(0));
-
-    }
-
-    public void updateTextRightStats() {
-        for (int dep = 0; dep < 7; dep++) {
-            textQueue[dep].setText("" + game.getQueueToDepartment(dep));
-            textSumEfe[dep].setText(Money.getStringFromLong(game.getDepartmentEfficiency(dep)));
-
-        }
-
-    }
-
-
-
 
 
     @FXML // fx:id="speedText"

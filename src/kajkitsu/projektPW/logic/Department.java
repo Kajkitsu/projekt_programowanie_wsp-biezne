@@ -31,9 +31,8 @@ public class Department {
     }
 
 
-    public void AddNewLine() {
+    public void addNewProductionLine() {
         if (numberOfProductionLines < maxLines) {
-
 
             ProductionLine line;
             if (IDOfDepartment == 6) line = new SellProductionLine(this, game, maxLevel);
@@ -52,12 +51,18 @@ public class Department {
     public void sendSigToUpgrade(int line) {
         ProductionLine productionLine = getLine(line);
 
-        //System.out.println("TEST 3!" + productionLine.isUpgrading());
         productionLine.setUpgrading(true);
-
-
     }
 
+    public ProductionLine getLine(int ID) {
+        ProductionLine line;
+        try {
+            line = listsLine.get(ID);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
+        return line;
+    }
 
     public List<ProductionLine> getListsLine() {
         return listsLine;
@@ -81,17 +86,6 @@ public class Department {
 
     public long getNewLineCost() {
         return newProductionLineCost;
-    }
-
-    public ProductionLine getLine(int ID) {
-        ProductionLine line;
-        try {
-            line = listsLine.get(ID);
-        } catch (IndexOutOfBoundsException e) {
-            return null;
-        }
-        return line;
-
     }
 
     public int getNumberOfProductionLines() {
