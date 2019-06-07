@@ -195,7 +195,7 @@ public class ProductionLine extends Thread {
     }
 
     public String getStatus() {
-        String tank = (tankInProductionLine != null) ? (tankInProductionLine.getName()) : (null);
+        String tank = (tankInProductionLine != null) ? (tankInProductionLine.getNameAndSerial()) : (null);
         return "department=\"" + String.valueOf(department.getIDOfDepartment()) + " " + department.getName() + "\"" +
                 " productionLineID=" + String.valueOf(ID) +
                 " ={" +

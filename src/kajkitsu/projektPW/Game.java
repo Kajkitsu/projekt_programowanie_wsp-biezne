@@ -98,7 +98,6 @@ public class Game {
 
     }
 
-
     public void setSpeed(int speed) {
         this.speed = speed;
     }
@@ -167,25 +166,13 @@ public class Game {
     }
 
     public int getRequiresForNewTanks(int dep) {
-        int level = this.getLevelGame() + 1;
-        int[] req = new int[]{level * 100, level * 100, level * 100, level * 100, level * 100, level * 100, level * 100};
-        req[level % 7] *= 3;
-        req[(level + 3) % 7] *= 2;
-        req[(level + 6) % 7] *= 4;
+        Tank tank = new Tank(this.levelGame, 0, "test");
 
-        return req[dep];
+        return tank.getRequiredResourcesFromDepartment(dep);
     }
 
     public Tank getNewTank(int ID) {
-        int level = this.getLevelGame() + 1;
-        int[] req = new int[]{level * 100, level * 100, level * 100, level * 100, level * 100, level * 100, level * 100};
-
-        req[level % 7] *= 3;
-        req[(level + 3) % 7] *= 2;
-        req[(level + 6) % 7] *= 4;
-
-        return new Tank(req, "Tank l" + level + " Sn:" + ID, level * 100);
-
+        return new Tank(this.levelGame, ID, "Czolg JELEN");
     }
 
     public int getSpeed() {
