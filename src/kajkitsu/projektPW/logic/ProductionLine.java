@@ -46,7 +46,7 @@ public class ProductionLine extends Thread {
 
 
     private void collectingResources(Tank tank) {
-        actualResources=0;
+        actualResources = 0;
         int requiredResources = tank.getRequiredResourcesFromDepartment(department.getIDOfDepartment());
         while (actualResources < requiredResources) {
             try {
@@ -62,7 +62,7 @@ public class ProductionLine extends Thread {
     }
 
     protected void sendTankToNextQueue(Tank tank) {
-        synchronized (queueToNextDepartment){
+        synchronized (queueToNextDepartment) {
             while (queueToNextDepartment.isBusy() || queueToNextDepartment.isFull()) {
                 try {
                     queueToNextDepartment.wait();
@@ -82,7 +82,7 @@ public class ProductionLine extends Thread {
 
     private Tank takeNextTank() {
         Tank tank = null;
-        synchronized (queueToThisDepartment){
+        synchronized (queueToThisDepartment) {
             while (queueToThisDepartment.isBusy() || queueToThisDepartment.isEmpty()) {
                 try {
                     queueToThisDepartment.wait();
@@ -110,42 +110,25 @@ public class ProductionLine extends Thread {
         this.initQueue();
         do {
             tankInProductionLine = null;
-            synchronized (this){
-                while(this.isBusy()) {
+            synchronized (queueToThisDepartment) {
+                while (queueToThisDepartment.isEmpty() && !this.isUpgrading()) {
                     try {
-                        this.wait();
+                        queueToThisDepartment.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                if (this.isUpgrading()) {
-                    upgrade();
-                }
-                synchronized (queueToThisDepartment) {
-                    while (queueToThisDepartment.isEmpty() && !this.isUpgrading()) {
-                        try {
-                            queueToThisDepartment.wait(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        if (this.isUpgrading()) {
-                            upgrade();
-                        }
-                    }
-                }
-
-                this.setBusy(true);
-                if (!queueToThisDepartment.isEmpty()) {
-                    tankInProductionLine = this.takeNextTank();
-                    if (tankInProductionLine != null) {
-                        this.collectingResources(tankInProductionLine);
-                        this.sendTankToNextQueue(tankInProductionLine);
-                    }
-                }
-                this.setBusy(false);
-                this.notifyAll();
             }
+            if (this.isUpgrading()) {
+                upgrade();
+            } else if (!queueToThisDepartment.isEmpty()) {
+                tankInProductionLine = this.takeNextTank();
+                if (tankInProductionLine != null) {
+                    this.collectingResources(tankInProductionLine);
+                    this.sendTankToNextQueue(tankInProductionLine);
+                }
 
+            }
         } while (true);
     }
 
@@ -158,9 +141,6 @@ public class ProductionLine extends Thread {
         }
     }
 
-    public synchronized void setBusy(boolean busy) {
-        isBusy = busy;
-    }
 
     public void setID(int ID) {
         this.ID = ID;
@@ -168,10 +148,6 @@ public class ProductionLine extends Thread {
 
     public boolean isUpgrading() {
         return isUpgrading;
-    }
-
-    public boolean isBusy() {
-        return isBusy;
     }
 
     public long getLevelCost() {
