@@ -44,7 +44,7 @@ public class Event extends Thread {
                 if (type == 4) {
                     for (int i = 0; i < 100; i++) {
 
-                        Tank tank = new Tank(game.getLevelGame(), i, "Czołg-prototyp JELEŃ");
+                        Tank tank = new Tank(game.getLevelGame(), i, "Czołg-prototyp JELEŃ", i);
                         game.addTankToGame(tank);
                     }
                 }

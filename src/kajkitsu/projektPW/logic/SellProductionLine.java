@@ -9,8 +9,8 @@ public class SellProductionLine extends ProductionLine {
     }
 
     @Override
-    protected void sendTankToNextQueue(Tank tank) {
-        game.sellTank(tankInProductionLine.sell(countTanksServiced));
+    protected synchronized void sendTankToNextQueue(Tank tank) {
+        game.sellTank(tankInProductionLine.sell());
         this.countTanksServiced++;
     }
 

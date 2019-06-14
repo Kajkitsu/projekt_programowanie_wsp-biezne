@@ -1,9 +1,13 @@
 package kajkitsu.projektPW;
 
+import kajkitsu.projektPW.gui.TankRecord;
+
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MySQL {
 
@@ -12,9 +16,44 @@ public class MySQL {
     private static final String password = "zaq1@WSX";
 
     public static void main(String[] args) {
-        insertTankToMySQL(1, "test", 2, 3, 4);
+        getRecords();
+        //insertTankToMySQL(1, "test", 2, 3, 4);
     }
 
+    public static List<TankRecord> getRecords() {
+        List<TankRecord> list = new ArrayList<TankRecord>();
+        try {
+            Connection conn = DriverManager.getConnection(url, user, password);
+
+            String query = "SELECT * FROM tanks_produced";
+
+            Statement st = conn.createStatement();
+
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+
+                TankRecord tankRecord = new TankRecord(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getInt("serial_number"),
+                        rs.getInt("level"),
+                        rs.getString("date_of_production"),
+                        rs.getInt("sum_of_required_resources"));
+
+                System.out.println(tankRecord.toString());
+                list.add(tankRecord);
+            }
+            st.close();
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("VendorError: " + e.getErrorCode());
+        }
+
+
+        return list;
+    }
 
     public static void insertTankToMySQL(int id, String name, int serial_number, int level, int sum_of_required_resources) {
         try {

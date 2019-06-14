@@ -2,17 +2,22 @@ package kajkitsu.projektPW.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import kajkitsu.projektPW.Game;
 import kajkitsu.projektPW.logic.Money;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class ControllerGUI implements Initializable {
     private Game game;
     private Button[][] buttonUpgradeProductionLineFromDepartment;
     private ProgressBar[][] progressBarOfTankProduction;
@@ -26,7 +31,6 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-
 
     public void setGame(Game game) {
         this.game = game;
@@ -357,6 +361,44 @@ public class Controller implements Initializable {
 
     }
 
+
+    boolean isDBTableshown = false;
+
+    public void showDBTable() {
+        if (!isDBTableshown) {
+            isDBTableshown = true;
+            Parent root;
+            try {
+                this.showTableButton.setDisable(true);
+                root = FXMLLoader.load(getClass().getResource("table.fxml"));
+                Stage stage = new Stage();
+                stage.setTitle("ProjektPW github.com/Kajkitsu");
+                stage.setScene(new Scene(root, 1000, 600));
+                stage.setResizable(false);
+                stage.show();
+                stage.setOnCloseRequest(e -> {
+                    try {
+                        this.showTableButton.setDisable(false);
+                        this.isDBTableshown = false;
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+//
+//
+//        Stage stage = new Stage();
+//        stage.setTitle("ProjektPW github.com/Kajkitsu");
+//        stage.setScene(new Scene(root, 1000, 600));
+//        stage.setResizable(false);
+//        stage.show();
+    }
+
     private void initButtonUpgradeForProductionLines() {
         for (int dep = 0; dep < 7; dep++) {
             for (int line = 0; line < 7; line++) {
@@ -470,6 +512,8 @@ public class Controller implements Initializable {
         if (e.getSource() == speedButtonx32) game.setSpeed(32);
     }
 
+    @FXML
+    private Button showTableButton;
 
     @FXML // fx:id="speedText"
     private Text speedText;

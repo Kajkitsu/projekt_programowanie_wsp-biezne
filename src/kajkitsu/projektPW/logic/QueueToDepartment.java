@@ -20,7 +20,7 @@ public class QueueToDepartment {
         if(maxTanksInQueue>tanksList.size()){
             synchronized (this){
                 tanksList.add(tank);
-                if (isEmpty) isEmpty = false;
+                isEmpty = false;
                 if (maxTanksInQueue == tanksList.size()) isFull = true;
 
                 this.notifyAll();
@@ -31,10 +31,10 @@ public class QueueToDepartment {
 
     public Tank takeTankFromQueue() {
         if(tanksList.size()>0){
-            Tank tank;
+            Tank tank = null;
             synchronized (this){
                 tank = tanksList.remove(0);
-                if (isFull) isFull = false;
+                isFull = false;
                 if (tanksList.size() == 0) isEmpty = true;
                 this.notifyAll();
             }

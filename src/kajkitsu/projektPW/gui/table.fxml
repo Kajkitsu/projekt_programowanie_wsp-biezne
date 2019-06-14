@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="kajkitsu.projektPW.gui.ControllerTable">
+    <children>
+        <VBox prefHeight="600.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <TableView fx:id="tableView" prefHeight="617.0" prefWidth="1000.0">
+                    <columns>
+                        <TableColumn fx:id="idColumn" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" resizable="false"
+                                     text="ID"/>
+                        <TableColumn fx:id="nameColumn" prefWidth="164.0" text="Nazwa"/>
+                        <TableColumn fx:id="serialNumberColumn" prefWidth="75.0" text="Numer seryjny"/>
+                        <TableColumn fx:id="levelColumn" prefWidth="288.0" text="Poziom"/>
+                        <TableColumn fx:id="dateColumn" prefWidth="75.0" text="Data produkcji"/>
+                        <TableColumn fx:id="resourcesColumn" prefWidth="75.0" text="Wymagane surowce"/>
+                    </columns>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </padding>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+                <Button fx:id="refreshButton" minWidth="-Infinity" mnemonicParsing="false" onAction="#updateController"
+                        prefHeight="26.0" prefWidth="978.0" text="Odśwież">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

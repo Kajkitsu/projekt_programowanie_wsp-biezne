@@ -8,8 +8,10 @@ public class Tank {
     private String name;
     private int level;
     private int serialNumber;
+    private int id;
 
-    public Tank(int level, int sn, String name) {
+    public Tank(int level, int sn, String name, int id) {
+        this.id = id;
         this.name = name;
         this.level = level;
         this.serialNumber = sn;
@@ -28,8 +30,8 @@ public class Tank {
 //        this.reward = reward;
 //    }
 
-    public int sell(int id) {
-        MySQL.insertTankToMySQL(id, this.getName(), this.getSerialNumber(), this.getLevel(), this.getSumOfRequiredResourcesFromDepartments());
+    public int sell() {
+        MySQL.insertTankToMySQL(this.getId(), this.getName(), this.getSerialNumber(), this.getLevel(), this.getSumOfRequiredResourcesFromDepartments());
         return reward;
     }
 
@@ -51,6 +53,10 @@ public class Tank {
 
     public int getSerialNumber() {
         return serialNumber;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int getSumOfRequiredResourcesFromDepartments() {

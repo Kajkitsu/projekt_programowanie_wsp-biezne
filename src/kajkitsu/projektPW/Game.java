@@ -11,6 +11,7 @@ public class Game {
     private int levelGame;
     private QueueToDepartment[] queueToDepartments;
     private Department[] departments;
+    private int tankCounter;
 
     public Game(int speed, int money, QueueToDepartment[] queueToDepartments) {
         this.speed = speed;
@@ -18,6 +19,7 @@ public class Game {
         this.countTanksSold = 0;
         this.levelGame = 0;
         this.queueToDepartments = queueToDepartments;
+        this.tankCounter = 0;
 
         new AutoTankAdder(this);
     }
@@ -90,11 +92,10 @@ public class Game {
             money.changeMoney(addMoney);
             countTanksSold++;
             money.setMoneyUpdating(false);
-
             money.notifyAll();
         }
 
-        levelGame = (countTanksSold / 100) + 1;
+        this.levelGame = (countTanksSold / 10) + 1;
 
     }
 
@@ -162,17 +163,19 @@ public class Game {
     }
 
     public int getLevelGame() {
-        return levelGame;
+
+        return this.levelGame;
     }
 
     public int getRequiresForNewTanks(int dep) {
-        Tank tank = new Tank(this.levelGame, 0, "test");
+        Tank tank = new Tank(this.levelGame, 0, "test", 0);
 
         return tank.getRequiredResourcesFromDepartment(dep);
     }
 
-    public Tank getNewTank(int ID) {
-        return new Tank(this.levelGame, ID, "Czolg JELEN");
+    public synchronized Tank getNewTank(int ID) {
+
+        return new Tank((tankCounter / 10) + 1, ID, "Czolg JELEN", tankCounter++);
     }
 
     public int getSpeed() {

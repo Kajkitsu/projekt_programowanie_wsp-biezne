@@ -23,8 +23,8 @@ public class GameGUI extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("game-gui.fxml"));
         Parent root = loader.load();
 
-        Controller controller = loader.getController();
-        controller.setGame(game);
+        ControllerGUI controllerGUI = loader.getController();
+        controllerGUI.setGame(game);
         primaryStage.setTitle("ProjektPW github.com/Kajkitsu");
         primaryStage.setScene(new Scene(root, 1410, 360));
         primaryStage.setResizable(false);
@@ -37,7 +37,7 @@ public class GameGUI extends Application {
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    controller.updateController();
+                    controllerGUI.updateController();
                 });
             }
         }, 100, 100);
